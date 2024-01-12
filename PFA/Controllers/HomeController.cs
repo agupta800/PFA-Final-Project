@@ -5,7 +5,8 @@ using System.Diagnostics;
 
 namespace PFA.Controllers
 {
-    [Authorize]
+    //[Authorize]
+    
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -14,13 +15,27 @@ namespace PFA.Controllers
         {
             _logger = logger;
         }
-
+      
         public IActionResult Index()
         {
             return View();
         }
+        
+        [Authorize]
+        public IActionResult FindaJobs()
+        {
+            return View();
+        }  
+        public IActionResult About()
+        {
+            return View();
+        }  
+        public IActionResult Blog()
+        {
+            return View();
+        }
 
-        public IActionResult Privacy()
+        public IActionResult Contact()
         {
             return View();
         }

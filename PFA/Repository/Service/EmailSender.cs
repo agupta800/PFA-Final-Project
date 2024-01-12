@@ -33,7 +33,9 @@ namespace PFA.Repository.Service
                 {
                     From = new MailAddress(getEmailSetting.From),
                     Subject = Subject,
-                    Body = message
+                    Body = message,
+                    BodyEncoding = System.Text.Encoding.ASCII,   
+                    IsBodyHtml = true,
 
 
                 };

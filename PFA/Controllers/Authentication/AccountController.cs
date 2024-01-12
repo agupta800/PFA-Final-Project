@@ -11,12 +11,14 @@ namespace PFA.Controllers.Authentication
         private readonly UserManager<IdentityUser> userManager;
         private readonly SignInManager<IdentityUser> signInmanager;
         private readonly IEmailSender emailSender;
+        private readonly IWebHostEnvironment webHostEnvironment;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender EmailSender)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender EmailSender, IWebHostEnvironment webHostEnvironment)
         {
             this.userManager = userManager;
             this.signInmanager = signInManager;
             emailSender = EmailSender;
+            this.webHostEnvironment = webHostEnvironment;
         }
         public IActionResult Index()
         {
@@ -51,15 +53,18 @@ namespace PFA.Controllers.Authentication
                     var result = await userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        string path = Path.Combine(webHostEnvironment.WebRootPath, "Template/Template.cshtml");
+                        string htmlString = System.IO.File.ReadAllText(path);
+                        htmlString = htmlString.Replace("{{title}}", "User Registration");
+                        htmlString = htmlString.Replace("{{Username}}", model.UserName);
+                        htmlString = htmlString.Replace("{{Email}}", model.Email);
+                        htmlString = htmlString.Replace("{{Password}}", model.Password);
                         bool status = await emailSender.EmailSenderAsync(
-                            model.Email,
-                            "Account Successfully Created",
-                            $"Dear {model.UserName},\n\n" +
-                            "Congratulations! Your account has been successfully created.\n" +
-                            "Thank you for choosing our platform. We are thrilled to have you on board!\n\n" +
-                            "Best regards,\n" +
-                            "Aster Innovations"
-                        ); await signInmanager.SignInAsync(user, isPersistent: false);
+                         model.Email,
+                         "Account Successfully Created",
+                          htmlString
+                          );
+                        await signInmanager.SignInAsync(user, isPersistent: false);
                         return RedirectToAction("Index", "Home");
 
                     }
