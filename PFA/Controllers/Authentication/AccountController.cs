@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Arebis.Core.AspNet.Mvc.Localization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using PFA.Repository.Interface;
 using PFA.Repository.Service;
 using PFA.ViewModel;
@@ -12,13 +14,16 @@ namespace PFA.Controllers.Authentication
         private readonly SignInManager<IdentityUser> signInmanager;
         private readonly IEmailSender emailSender;
         private readonly IWebHostEnvironment webHostEnvironment;
+        private readonly IStringLocalizer _localizer;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender EmailSender, IWebHostEnvironment webHostEnvironment)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender EmailSender, IWebHostEnvironment webHostEnvironment, IStringLocalizer localizer)
         {
             this.userManager = userManager;
             this.signInmanager = signInManager;
             emailSender = EmailSender;
             this.webHostEnvironment = webHostEnvironment;
+            _localizer = localizer;
+
         }
         public IActionResult Index()
         {
@@ -46,7 +51,7 @@ namespace PFA.Controllers.Authentication
                     }
                     var user = new IdentityUser
                     {
-                        UserName = model.Email,
+                        UserName = model.UserName,
                         Email = model.Email,
 
                     };

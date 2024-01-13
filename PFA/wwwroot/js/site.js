@@ -1,32 +1,38 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
-// define all UI variable
+﻿// Define UI variables
 const navToggler = document.querySelector('.nav-toggler');
 const navMenu = document.querySelector('.site-navbar ul');
 const navLinks = document.querySelectorAll('.site-navbar a');
 
-// load all event listners
-allEventListners();
+// Load event listeners
+navToggler.addEventListener('click', togglerClick);
+navLinks.forEach(elem => elem.addEventListener('click', navLinkClick));
 
-// functions of all event listners
-function allEventListners() {
-    // toggler icon click event
-    navToggler.addEventListener('click', togglerClick);
-    // nav links click event
-    navLinks.forEach(elem => elem.addEventListener('click', navLinkClick));
-}
-
-// togglerClick function
+// Toggle click function
 function togglerClick() {
     navToggler.classList.toggle('toggler-open');
     navMenu.classList.toggle('open');
 }
 
-// navLinkClick function
+// Nav link click function
 function navLinkClick() {
     if (navMenu.classList.contains('open')) {
         navToggler.click();
     }
 }
+
+// Toggle password visibility
+$(document).ready(function () {
+    $("#togglePassword").click(function () {
+        var passwordField = $("#password");
+        var passwordFieldType = passwordField.attr("type");
+
+        if (passwordFieldType == "password") {
+            passwordField.attr("type", "text");
+        } else {
+            passwordField.attr("type", "password");
+        }
+
+        // Toggle eye icon
+        $(this).find("i").toggleClass("bi-eye bi-eye-slash");
+    });
+});

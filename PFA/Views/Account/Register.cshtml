@@ -1,4 +1,6 @@
-﻿@model RegisterVM
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@model RegisterVM
 @{
     ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/_LayoutLR.cshtml";
@@ -7,38 +9,38 @@
 
 <form method="post">
 
-    <h3 class="text-muted ab-1" style="font-size:20px;">Create An Account</h3>
+    <h3 class="text-muted ab-1" style="font-size:20px;">@Localizer["Create An Account"]</h3>
 
     <hr />
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Corrected syntax -->
 
     <div class="mb-3">
-        <label asp-for="UserName"></label> <!-- Corrected syntax -->
-        <input type="UserName" class="form-control" asp-for="UserName"  placeholder="Enter UserName" />
+        <label asp-for="UserName">@Localizer["UserName"]</label> <!-- Corrected syntax -->
+        <input type="text" class="form-control" asp-for="UserName" placeholder="@Localizer["Enter UserName"]" />
         <span asp-validation-for="UserName" class="text-danger"></span> <!-- Corrected syntax -->
     </div>
 
     <div class="mb-3">
-        <label asp-for="Email"></label> <!-- Corrected syntax -->
-        <input type="email" class="form-control" asp-for="Email" autocomplete="Email" placeholder="Enter email" />
+        <label asp-for="Email">@Localizer["Email"]</label> <!-- Corrected syntax -->
+        <input type="email" class="form-control" asp-for="Email"  placeholder="@Localizer["Enter email"]" />
         <span asp-validation-for="Email" class="text-danger"></span> <!-- Corrected syntax -->
     </div>
 
     <div class="mb-3">
-        <label asp-for="Password"></label> <!-- Corrected syntax -->
-        <input type="password" class="form-control" asp-for="Password" placeholder="Enter password" /> <!-- Corrected type -->
+        <label asp-for="Password">@Localizer["Password"]</label> <!-- Corrected syntax -->
+        <input type="password" class="form-control" asp-for="Password" placeholder="@Localizer["Enter password"]" /> <!-- Corrected type -->
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="ConfirmPassword"></label> <!-- Corrected syntax -->
-        <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="Enter confirm password" /> <!-- Corrected type and placeholder -->
+        <label asp-for="ConfirmPassword">@Localizer["ConfirmPassword"]</label> <!-- Corrected syntax -->
+        <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="@Localizer["Enter confirm password"]"> <!-- Corrected type and placeholder -->
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
 
     <div class="float-end">
-        <button type="submit" class="btn-primary ab-2 p-3">Register</button> <!-- Corrected class name -->
+        <button type="submit" class="btn-primary ab-2 p-3">@Localizer["Register"]</button> <!-- Corrected class name -->
     </div>
 
 </form>

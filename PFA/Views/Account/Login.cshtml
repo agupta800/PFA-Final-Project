@@ -1,4 +1,7 @@
-﻿@model LoginVM
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@model LoginVM
 
 @{
     ViewData["Title"] = "Login";
@@ -7,33 +10,33 @@
 
 <form method="post">
 
-    <h3 class="text-muted ab-1" style="font-size:20px;">Login</h3>
+    <h3 class="text-muted ab-1" style="font-size:20px;">@Localizer["Login"]</h3>
 
     <hr />
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
     <div class="mb-3">
-        <label asp-for="Email"></label>
+        <label asp-for="Email"> @Localizer["Email"]*:</label>
         <input type="email" id="email" class="form-control" asp-for="Email" autocomplete="Email" placeholder="Enter email" />
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
-        <label asp-for="Password"></label>
+        <label asp-for="Password">@Localizer["Password"]</label>
         <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Enter password" />
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
     <div class="mb-3">
         <label>
-            <input type="checkbox" id="RememberMe" asp-for="RememberMe" />
-            Remember Me
+            <input type="checkbox" id="RememberMe" asp-for="RememberMe" />@Localizer["Remember Me"]
+            
         </label>
     </div>
 
     <div class="float-end">
-        <button type="submit" class="btn btn-primary ab-2 p-3">Login</button>
+        <button type="submit" class="btn btn-primary ab-2 p-3">@Localizer["Login"]</button>
     </div>
 
 </form>

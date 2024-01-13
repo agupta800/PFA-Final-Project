@@ -1,4 +1,6 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> signInManager
 @inject UserManager<IdentityUser> userManager
 
@@ -16,14 +18,40 @@
     }
     else
     {
+
         <li class="nav-item">
-            <a asp-action="Login" asp-controller="Account" class="nav-link">Login</a>
+            <a asp-action="Login" asp-controller="Account" class="nav-link">@Localizer["Login"]</a>
         </li>
         <li class="nav-item">
-            <a asp-action="Register" asp-controller="Account" class="nav-link">Register</a>
+            <a asp-action="Register" asp-controller="Account" class="nav-link">@Localizer["Register"]</a>
         </li>
+     @*    <select id="languageDropdown" onchange="changeLanguage()">
+            <option value="?culture=ne" title="Show page in Nepali">Nepali</option>
+            <option value="?culture=he" title="Show page in Hindi">Hindi</option>
+            <option value="?culture=en" title="Show page in English">English</option>
+        </select>
+
+        <script>
+            function changeLanguage() {
+                var dropdown = document.getElementById("languageDropdown");
+                var selectedValue = dropdown.options[dropdown.selectedIndex].value;
+                window.location.href = selectedValue;
+            }
+        </script> *@
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="?culture=ne" title="Show page in Nepali">Nepali</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="?culture=he" title="Show page in Hindi">Hindi</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" href="?culture=en" title="Show page in English">En</a>
+        </li>
+            
+
 
     }
+
 </ul>
 
 
