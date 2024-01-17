@@ -7,9 +7,9 @@ namespace PFA.JobModel
 {
     public class JobPostModel
     {
-        [Key] 
-        [Required]
-       
+        [Key]
+
+
         public int JobID { get; set; }
 
 

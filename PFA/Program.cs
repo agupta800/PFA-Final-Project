@@ -3,14 +3,18 @@ using Arebis.Core.Localization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PFA.Data;
+using PFA.JobModel;
 using PFA.Localize;
 using PFA.Repository.Interface;
 using PFA.Repository.Service;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<JobPostDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("conn")));
 
 builder.Services.AddDbContext<ApplicationContext>(option =>
     {

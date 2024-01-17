@@ -9,24 +9,27 @@ using PFA.Models;
 using PFA.Repository.Interface;
 using PFA.Repository.Service;
 using PFA.ViewModel;
-
+using PFA.JobModel;
+using System;
 namespace PFA.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly JobPostDbContext _context;
 
-        public AdminController(UserManager<IdentityUser> userManager)
+        public AdminController(UserManager<IdentityUser> userManager, JobPostDbContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
         public IActionResult Admin()
         {
             return View();
         }
 
-        
+
         [HttpGet]
         public async Task<IActionResult> UserList()
         {
@@ -37,7 +40,7 @@ namespace PFA.Controllers
             foreach (var user in users)
             {
                 var roles = await _userManager.GetRolesAsync(user);
-                var role = roles.FirstOrDefault() ??"Register User";
+                var role = roles.FirstOrDefault() ?? "Register User";
 
                 var userViewModel = new UserViewModel
                 {
@@ -50,11 +53,29 @@ namespace PFA.Controllers
 
             return View(userViewModelList);
         }
-        public IActionResult JobList()
+        [HttpGet]
+        public IActionResult newJob()
         {
             return View();
         }
 
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult newJob(JobPostModel model)
+        {
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.JobPosts.Add(model);
+                    _context.SaveChanges();
+                    return RedirectToAction("newJob");
+                }
+
+                // If ModelState is not valid, return to the Create view with the validation errors
+                return View(model);
+            }
+
+        }
     }
 }

@@ -1,17 +1,25 @@
-﻿
+﻿@model IEnumerable<JobPostModel>
+
 @{
     ViewData["Title"] = "JobList";
     Layout = "~/Views/Shared/_AdminPartial.cshtml";
 }
 
-<h1>JobList</h1>
+<h1>NewJob</h1>
 
 
 
+<div asp-validation-summary="All" class="text-danger"></div>
 
 
 <div class="container mt-4">
     <form asp-action="NewJob" method="POST" id="newJob_form">
+        @Html.AntiForgeryToken()
+
+        <!-- Your existing form fields -->
+
+   
+
 
         <div class="row">
             <div class="col-md-12">
@@ -60,7 +68,27 @@
             </div>
         </div>
     </form>
+    <script>
+        $(document).ready(function () {
+            $('#newJob_form').submit(function (e) {
+                e.preventDefault();
 
+                $.ajax({
+                    url: '@Url.Action("NewJob", "Admin")',
+                    type: 'POST',
+                    data: $(this).serialize(),
+                    success: function (data) {
+                        alert(data); // Show success message or redirect as needed
+                    },
+                    error: function () {
+                        alert('Error submitting the form.');
+                    }
+                });
+            });
+        });
+
+
+    </script>
     @if (TempData["msg"] != null)
     {
         <script>

@@ -36,3 +36,8 @@ $(document).ready(function () {
         $(this).find("i").toggleClass("bi-eye bi-eye-slash");
     });
 });
+
+// Add this script at the end of your view
+
+   
+
