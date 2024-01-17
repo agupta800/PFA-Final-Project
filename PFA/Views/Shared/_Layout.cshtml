@@ -51,7 +51,13 @@
                         <li>
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                         </li>
-                       
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Admin">Admin</a>
+                            </li>
+                        }
+
                            @*  <li class="nav-item">
                                 <a class="nav-link text-dark" href="?__LocalizeFormat=@@Localizer[%22{0}%22]" title="Show Localizer calls">@@?</a>
                             </li> *@

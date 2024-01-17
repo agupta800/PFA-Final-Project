@@ -17,4 +17,12 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.16" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\DBAssests\plugins\bs-stepper\css\" />
+    <Folder Include="wwwroot\DBAssests\plugins\datatable\css\" />
+    <Folder Include="wwwroot\DBAssests\plugins\fullcalendar\css\" />
+    <Folder Include="wwwroot\DBAssests\plugins\input-tags\css\" />
+    <Folder Include="wwwroot\DBAssests\plugins\notifications\css\" />
+  </ItemGroup>
+
 </Project>

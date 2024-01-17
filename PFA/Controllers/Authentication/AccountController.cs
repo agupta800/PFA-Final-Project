@@ -93,7 +93,8 @@ namespace PFA.Controllers.Authentication
         {
             return View();
         }
-        [HttpPost]
+
+      
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)
         {

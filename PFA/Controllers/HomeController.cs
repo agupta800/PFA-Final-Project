@@ -21,7 +21,7 @@ namespace PFA.Controllers
             return View();
         }
         
-        [Authorize]
+        [Authorize ]
         public IActionResult FindaJobs()
         {
             return View();
