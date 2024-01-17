@@ -19,15 +19,15 @@ namespace PFA.JobModel
 
         [Required]
         [DisplayName("Enter the Job Title")]
-        public string JobTitle { get; set; } = default!;
+        public string jobTitle { get; set; } = default!;
 
         [Required]
         [DisplayName("Enter the ApplyLink")]
-        public string Applylink { get; set; }= default!;
+        public string applylink { get; set; }= default!;
 
         [Required]
         [DisplayName("Enter the Description in Text")]
-        public string TxtDescription { get; set; } = default!;
+        public string txtDescription { get; set; } = default!;
 
         [Required]
         [DisplayName("Enter the Date")]

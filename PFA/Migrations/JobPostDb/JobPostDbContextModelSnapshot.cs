@@ -30,15 +30,7 @@ namespace PFA.Migrations.JobPostDb
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobID"), 1L, 1);
 
-                    b.Property<string>("Applylink")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("JobTitle")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TxtDescription")
+                    b.Property<string>("applylink")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -52,6 +44,14 @@ namespace PFA.Migrations.JobPostDb
 
                     b.Property<DateTime>("inputDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("jobTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("txtDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("JobID");
 

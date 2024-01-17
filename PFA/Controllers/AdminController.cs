@@ -18,11 +18,13 @@ namespace PFA.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly JobPostDbContext _context;
+        private readonly ILogger<AdminController> _logger;
 
-        public AdminController(UserManager<IdentityUser> userManager, JobPostDbContext context)
+        public AdminController(UserManager<IdentityUser> userManager, JobPostDbContext context, ILogger<AdminController> logger)
         {
             _userManager = userManager;
             _context = context;
+            _logger = logger;
         }
         public IActionResult Admin()
         {
@@ -77,5 +79,76 @@ namespace PFA.Controllers
             }
 
         }
+
+        [HttpGet]
+        public IActionResult JobList()
+        {
+            return View();
+        }
+        public async Task<IActionResult> AllJobs()
+        {
+            var allData = await _context.JobPosts.ToListAsync();
+            return Json(allData);
+
+        }
+
+        [HttpGet]
+        public IActionResult Updatejob()
+        {
+            return View();
+        }
+
+
+
+        public async Task<IActionResult> Updatejob(JobPostModel models)
+        {
+            try
+            {
+                _context.Update(models);
+                await _context.SaveChangesAsync(); // Save changes asynchronously
+
+                return Json(new { success = true, message = "Data updated successfully" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error updating data: {ex.Message}, Models: {Newtonsoft.Json.JsonConvert.SerializeObject(models)}");
+                return Json(new { success = false, message = "Error updating data: " + ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteJob([FromBody] JobPostModel deletedJob)
+        {
+            try
+            {
+                if (deletedJob == null)
+                {
+                    return BadRequest("Invalid data");
+                }
+
+                // Find the job in the context based on JobID
+                var existingJob = await _context.JobPosts.FindAsync(deletedJob.JobID);
+
+                if (existingJob == null)
+                {
+                    return NotFound("Job not found");
+                }
+
+                // Remove the job from the context
+                _context.JobPosts.Remove(existingJob);
+
+                // Save changes asynchronously
+                await _context.SaveChangesAsync();
+
+                return Json(new { success = true, message = "Job deleted successfully" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error deleting data: {ex.Message}, Models: {Newtonsoft.Json.JsonConvert.SerializeObject(deletedJob)}");
+                return Json(new { success = false, message = "Error deleting data: " + ex.Message });
+            }
+        }
+
+
     }
 }
