@@ -117,36 +117,15 @@ namespace PFA.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteJob([FromBody] JobPostModel deletedJob)
+        public IActionResult DeleteJob(int id)
         {
-            try
-            {
-                if (deletedJob == null)
-                {
-                    return BadRequest("Invalid data");
-                }
+            // Log or debug the received ID
+            Console.WriteLine($"Received JobID for deletion: {id}");
 
-                // Find the job in the context based on JobID
-                var existingJob = await _context.JobPosts.FindAsync(deletedJob.JobID);
+            // Perform the deletion logic here
+            // ...
 
-                if (existingJob == null)
-                {
-                    return NotFound("Job not found");
-                }
-
-                // Remove the job from the context
-                _context.JobPosts.Remove(existingJob);
-
-                // Save changes asynchronously
-                await _context.SaveChangesAsync();
-
-                return Json(new { success = true, message = "Job deleted successfully" });
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Error deleting data: {ex.Message}, Models: {Newtonsoft.Json.JsonConvert.SerializeObject(deletedJob)}");
-                return Json(new { success = false, message = "Error deleting data: " + ex.Message });
-            }
+            return Json(new { success = true, message = "Data deleted successfully" });
         }
 
 

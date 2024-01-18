@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationContext>(option =>
     {
         option.UseSqlServer(builder.Configuration.GetConnectionString("conn"));
 
-});
+    });
 
 builder.Services.AddDbContext<PFA.Data.Localize.LocalizeDbContext>(optionsAction: options =>
     options.UseSqlServer(
@@ -28,12 +28,13 @@ builder.Services.AddDbContext<PFA.Data.Localize.LocalizeDbContext>(optionsAction
 builder.Services.AddTransient<ILocalizationSource, DbContextLocalizationSource>();
 
 
-builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
 
-builder.Services.AddTransient<IEmailSender,EmailSender>();
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services
-    .AddLocalizationFromSource(builder.Configuration, options => {
+    .AddLocalizationFromSource(builder.Configuration, options =>
+    {
         options.Domains = new string[] { "PFA" };
         options.CacheFileName = "LocalizationCache.json";
         options.UseOnlyReviewedLocalizationValues = false;
@@ -52,7 +53,7 @@ builder.Services.ConfigureApplicationCookie(option =>
     {
         option.AccessDeniedPath = "/Account/Login";
         option.LogoutPath = "/Account/Login";
-        option.LogoutPath= "/Account/Logout";
+        option.LogoutPath = "/Account/Logout";
         option.Cookie.Name = "PFA";
         option.ExpireTimeSpan = TimeSpan.FromDays(30);
         option.SlidingExpiration = true;

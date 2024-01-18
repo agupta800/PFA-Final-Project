@@ -16,16 +16,11 @@
                         url: "/Admin/AllJobs",
                         dataType: "json"
                     },
-                    update: {
-                        url: "/Admin/Updatejob",
-                        type: "POST",
-                        dataType: "json"
-                    },
                     destroy: {
                         url: "/Admin/DeleteJob",
                         type: "POST",
                         dataType: "json"
-                    },
+                    }
                 },
                 schema: {
                     model: {
@@ -65,7 +60,24 @@
                 { field: "jobTitle", title: "Job Title", width: 150 },
                 { field: "applylink", title: "Apply Link", width: 150 },
                 { field: "txtDescription", title: "Description", width: 150 },
-                { field: "inputDate", title: "Date", width: 150 },
+                {
+                    field: "inputDate",
+                    title: "Date",
+                    width: 150,
+                    format: "{0:MM-dd-yyyy H:mm}",
+                    editor: function (container, options) {
+                        $('<input name="' + options.field + '"/>')
+                            .appendTo(container)
+                            .kendoDatePicker({
+                                format: "yyyy-MM-dd H:mm",
+                                change: function () {
+                                    var value = this.value();
+                                    var formattedDate = kendo.toString(value, "yyyy-MM-dd H:mm");
+                                    options.model.inputDate = formattedDate;
+                                }
+                            });
+                    }
+                },
                 { field: "companyImageUrl", title: "Company Image Url", width: 200 }
             ],
             save: function (e) {
@@ -94,15 +106,13 @@
             remove: function (e) {
                 // Handle the delete operation
                 if (confirm("Are you sure you want to delete this record?")) {
-                    var deletedData = e.model.toJSON();
                     $.ajax({
-                        url: "/Admin/DeleteJob",
+                        url: "/Admin/DeleteJob/" + e.model.JobID,
                         type: "POST",
-                        data: deletedData,
                         success: function (result) {
                             // Handle the success response
                             console.log("Data deleted successfully");
-                            // You may want to refresh the grid to reflect the updated data
+                            // Refresh the grid to reflect the updated data
                             $("#grid").data("kendoGrid").dataSource.read();
                         },
                         error: function (xhr, status, error) {
@@ -111,7 +121,8 @@
                         }
                     });
                 } else {
-                    e.preventDefault(); // Prevent the grid from refreshing if delete is canceled
+                    // Prevent automatic deletion if the user cancels the confirmation
+                    e.preventDefault();
                 }
             }
         });

@@ -1,15 +1,16 @@
-﻿
+﻿@model IEnumerable<JobPostModel>
 @{
     ViewData["Title"] = "FindaJobs";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
 
 <main>
-
     <!-- Hero Area Start-->
     <div class="slider-area">
         <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-             style="background-image: url('@Url.Content("~/assets/img/hero/about1.jpg")')">
+             style="background-image: url('@Url.Content("~/assets/img/about1.jpg")')">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
@@ -23,36 +24,33 @@
     </div>
     <!-- Hero Area End -->
     <!-- Job List Area Start -->
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-@*             <div class="col-md-8">
-                @foreach (AdminModel item in Model)
-                {
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <img src="@item.companyImageUrl" class="img-fluid" alt="@item.companyname" />
-                                </div>
-                                <div class="col-md-9">
-                                    <h4 class="card-title"><a href='@item.applylink' target="_blank">@item.jobTitle</a></h4>
-                                    <ul class="list-unstyled">
-                                        <li>@item.companyname</li>
-                                        <li>@item.jobTitle</li>
-                                        <li>@item.inputDate</li>
-                                    </ul>
-                                </div>
-                            </div>
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            @foreach (JobPostModel item in Model)
+            {
+                <div class="single-job-items mb-30">
+                    <div class="job-items">
+                        <div class="company-img">
+                            <a href='@item.applylink' target="_blank">
+                                <img src="@item.companyImageUrl" alt="@item.companyname" />
+                            </a>
                         </div>
-                        <div class="card-footer text-muted d-flex justify-content-between">
-                            <a href='@item.applylink' target="_blank" class="btn btn-primary">Apply Link</a>
-                            <span class="text-muted">7 hours ago</span>
+                        <div class="job-tittle">
+                            <a href='@item.applylink' target="_blank">
+                                <h4>Company Name: @item.companyname</h4>
+                            </a>
+                            <ul>
+                                <li>Job Tile: @item.jobTitle</li>
+                                <li>Description: @item.txtDescription</li>
+                                <li>Date: @item.inputDate</li>
+                            </ul>
+                        </div>
+                        <div class="items-link">
+                            <button class="bubbly-button" onclick="window.location='@item.applylink'">Apply Link</button>
                         </div>
                     </div>
-                }
-            </div>
- *@        </div>
+                </div>
+            }
+        </div>
     </div>
 </main>
-
-

@@ -23,7 +23,7 @@ namespace PFA.JobModel
 
         [Required]
         [DisplayName("Enter the ApplyLink")]
-        public string applylink { get; set; }= default!;
+        public string applylink { get; set; } = default!;
 
         [Required]
         [DisplayName("Enter the Description in Text")]
