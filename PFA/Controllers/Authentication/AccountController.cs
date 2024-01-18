@@ -93,37 +93,45 @@ namespace PFA.Controllers.Authentication
         {
             return View();
         }
+
+      
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)
         {
-
             try
             {
                 if (ModelState.IsValid)
                 {
-                    IdentityUser checkEmail = await userManager.FindByEmailAsync(model.Email);
-                    if (checkEmail == null)
+                    var user = await userManager.FindByEmailAsync(model.Email);
+
+                    if (user == null)
                     {
                         ModelState.AddModelError(string.Empty, "Email not found");
                         return View(model);
                     }
-                    if (await userManager.CheckPasswordAsync(checkEmail, model.Password) == false)
-                    {
-                        ModelState.AddModelError(string.Empty, "Invalid Credentials");
-                        return View(model);
-                    }
-                    var result = await signInmanager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+
+                    // Check the password
+                    var result = await signInmanager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
+
                     if (result.Succeeded)
                     {
                         return RedirectToAction("Index", "Home");
                     }
 
+                    if (result.IsLockedOut)
+                    {
+                        // Handle account lockout
+                        // You can redirect to a lockout page or show a custom message
+                        return View("Lockout");
+                    }
+
                     ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
                 }
             }
-
             catch (Exception ex)
             {
+                // Log the exception details
+                // logger.LogError(ex, "Exception during user login");
                 throw;
             }
 

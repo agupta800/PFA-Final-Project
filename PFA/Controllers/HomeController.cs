@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PFA.JobModel;
 using PFA.Models;
 using System.Diagnostics;
 
@@ -10,22 +12,28 @@ namespace PFA.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly JobPostDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, JobPostDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
       
         public IActionResult Index()
         {
             return View();
         }
-        
+
         [Authorize]
         public IActionResult FindaJobs()
         {
-            return View();
-        }  
+
+            var jobPosts = _context.JobPosts.ToList();
+
+            return View(jobPosts);
+        }
+
         public IActionResult About()
         {
             return View();

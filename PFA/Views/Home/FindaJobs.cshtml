@@ -1,7 +1,56 @@
-﻿
+﻿@model IEnumerable<JobPostModel>
 @{
     ViewData["Title"] = "FindaJobs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-<p>This is Find ajob page</p>
 
+<main>
+    <!-- Hero Area Start-->
+    <div class="slider-area">
+        <div class="single-slider section-overly slider-height2 d-flex align-items-center"
+             style="background-image: url('@Url.Content("~/assets/img/about1.jpg")')">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="hero-cap text-center">
+                            <h2>Get your job</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Hero Area End -->
+    <!-- Job List Area Start -->
+    <div class="row justify-content-center">
+        <div class="col-xl-10">
+            @foreach (JobPostModel item in Model)
+            {
+                <div class="single-job-items mb-30">
+                    <div class="job-items">
+                        <div class="company-img">
+                            <a href='@item.applylink' target="_blank">
+                                <img src="@item.companyImageUrl" alt="@item.companyname" />
+                            </a>
+                        </div>
+                        <div class="job-tittle">
+                            <a href='@item.applylink' target="_blank">
+                                <h4>Company Name: @item.companyname</h4>
+                            </a>
+                            <ul>
+                                <li>Job Tile: @item.jobTitle</li>
+                                <li>Description: @item.txtDescription</li>
+                                <li>Date: @item.inputDate</li>
+                            </ul>
+                        </div>
+                        <div class="items-link">
+                            <button class="bubbly-button" onclick="window.location='@item.applylink'">Apply Link</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</main>

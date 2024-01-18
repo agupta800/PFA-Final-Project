@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "JobList";
+    Layout = "~/Views/Shared/_AdminPartial.cshtml";
+}
+
+<h1>JobList</h1>
+<div id="grid"></div>
+
+<!-- Include necessary scripts -->
+<script>
+    $(document).ready(function () {
+        $("#grid").kendoGrid({
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/Admin/AllJobs",
+                        dataType: "json"
+                    },
+                    destroy: {
+                        url: "/Admin/DeleteJob",
+                        type: "POST",
+                        dataType: "json"
+                    }
+                },
+                schema: {
+                    model: {
+                        id: "JobID",
+                        fields: {
+                            JobID: { type: "int" },
+                            companyname: { type: "string" },
+                            jobTitle: { type: "string" },
+                            applylink: { type: "string" },
+                            txtDescription: { type: "string" },
+                            inputDate: { type: "date" },
+                            companyImageUrl: { type: "string" }
+                        }
+                    }
+                },
+                pageSize: 20,
+                serverPaging: true,
+                serverFiltering: true,
+                serverSorting: true
+            },
+            height: 550,
+            filterable: true,
+            sortable: true,
+            pageable: true,
+            batch: true,
+            editable: {
+                mode: "popup",
+                window: {
+                    title: "Edit Job Record",
+                    animation: true
+                }
+            },
+            toolbar: ["create", "save", "cancel"],
+            columns: [
+                { command: ["edit", "destroy"], title: "Action", width: 150 },
+                { field: "companyname", title: "Company Name", width: 150 },
+                { field: "jobTitle", title: "Job Title", width: 150 },
+                { field: "applylink", title: "Apply Link", width: 150 },
+                { field: "txtDescription", title: "Description", width: 150 },
+                {
+                    field: "inputDate",
+                    title: "Date",
+                    width: 150,
+                    format: "{0:MM-dd-yyyy H:mm}",
+                    editor: function (container, options) {
+                        $('<input name="' + options.field + '"/>')
+                            .appendTo(container)
+                            .kendoDatePicker({
+                                format: "yyyy-MM-dd H:mm",
+                                change: function () {
+                                    var value = this.value();
+                                    var formattedDate = kendo.toString(value, "yyyy-MM-dd H:mm");
+                                    options.model.inputDate = formattedDate;
+                                }
+                            });
+                    }
+                },
+                { field: "companyImageUrl", title: "Company Image Url", width: 200 }
+            ],
+            save: function (e) {
+                e.preventDefault();
+
+                // Extract the edited data
+                var editedData = e.model.toJSON();
+
+                // Perform custom logic or send the data to the server manually
+                $.ajax({
+                    url: "/Admin/Updatejob",
+                    type: "POST",
+                    data: editedData,
+                    success: function (result) {
+                        // Handle the success response
+                        console.log("Data updated successfully");
+                        // You may want to refresh the grid to reflect the updated data
+                        $("#grid").data("kendoGrid").dataSource.read();
+                    },
+                    error: function (xhr, status, error) {
+                        // Handle the error response
+                        console.error("Error updating data:", error);
+                    }
+                });
+            },
+            remove: function (e) {
+                // Handle the delete operation
+                if (confirm("Are you sure you want to delete this record?")) {
+                    $.ajax({
+                        url: "/Admin/DeleteJob/" + e.model.JobID,
+                        type: "POST",
+                        success: function (result) {
+                            // Handle the success response
+                            console.log("Data deleted successfully");
+                            // Refresh the grid to reflect the updated data
+                            $("#grid").data("kendoGrid").dataSource.read();
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle the error response
+                            console.error("Error deleting data:", error);
+                        }
+                    });
+                } else {
+                    // Prevent automatic deletion if the user cancels the confirmation
+                    e.preventDefault();
+                }
+            }
+        });
+    });
+</script>
