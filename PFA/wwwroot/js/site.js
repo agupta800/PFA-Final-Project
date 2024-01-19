@@ -21,21 +21,7 @@ function navLinkClick() {
 }
 
 // Toggle password visibility
-$(document).ready(function () {
-    $("#togglePassword").click(function () {
-        var passwordField = $("#password");
-        var passwordFieldType = passwordField.attr("type");
 
-        if (passwordFieldType == "password") {
-            passwordField.attr("type", "text");
-        } else {
-            passwordField.attr("type", "password");
-        }
-
-        // Toggle eye icon
-        $(this).find("i").toggleClass("bi-eye bi-eye-slash");
-    });
-});
 
 // Add this script at the end of your view
 

@@ -8,24 +8,45 @@
 
 <main>
     <!-- Hero Area Start-->
-    <div class="slider-area">
+ @*    <div class="slider-area">
         <div class="single-slider section-overly slider-height2 d-flex align-items-center"
              style="background-image: url('@Url.Content("~/assets/img/about1.jpg")')">
             <div class="container">
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>Get your job</h2>
+                            <h2><b>Get your Dream</b></h2>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div> *@
+
+    <div class="container-xxl py-5 bg-dark page-header mb-8">
+        <div class="container my-5 pt-5 pb-4">
+            <h1 class="display-3 text-white mb-3 animated slideInDown">Job List</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb text-uppercase">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item text-white active" aria-current="page">Job List</li>
+                </ol>
+            </nav>
+        </div>
     </div>
+    <!-- Header End -->
+    <!-- Jobs Start -->
+     
+            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.2s">Job Listing</h1>
+     
+                 
+                
     <!-- Hero Area End -->
     <!-- Job List Area Start -->
+
     <div class="row justify-content-center">
-        <div class="col-xl-10">
+        <div class="col-xl-12">
             @foreach (JobPostModel item in Model)
             {
                 <div class="single-job-items mb-30">
@@ -40,7 +61,7 @@
                                 <h4>Company Name: @item.companyname</h4>
                             </a>
                             <ul>
-                                <li>Job Tile: @item.jobTitle</li>
+                                <li>Job Title: @item.jobTitle</li>
                                 <li>Description: @item.txtDescription</li>
                                 <li>Date: @item.inputDate</li>
                             </ul>
@@ -53,4 +74,5 @@
             }
         </div>
     </div>
+   
 </main>
