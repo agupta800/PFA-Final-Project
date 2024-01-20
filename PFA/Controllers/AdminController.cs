@@ -119,14 +119,29 @@ namespace PFA.Controllers
         [HttpPost]
         public IActionResult DeleteJob(int id)
         {
-            // Log or debug the received ID
-            Console.WriteLine($"Received JobID for deletion: {id}");
+            try
+            {
+                // Find the job post by ID
+                var jobPost = _context.JobPosts.Find(id);
 
-            // Perform the deletion logic here
-            // ...
+                if (jobPost == null)
+                {
+                    return Json(new { success = false, message = "Job not found" });
+                }
 
-            return Json(new { success = true, message = "Data deleted successfully" });
+                // Remove the job post from the context
+                _context.JobPosts.Remove(jobPost);
+                _context.SaveChanges(); // Save changes synchronously
+
+                return Json(new { success = true, message = "Data deleted successfully" });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"Error deleting data: {ex.Message}, JobID: {id}");
+                return Json(new { success = false, message = "Error deleting data: " + ex.Message });
+            }
         }
+
 
 
     }
