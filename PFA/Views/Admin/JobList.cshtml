@@ -94,6 +94,10 @@
                     success: function (result) {
                         // Handle the success response
                         console.log("Data updated successfully");
+                        var successMessage = "Data Updated Successfully";
+
+                        // You can use successMessage as needed (e.g., display it in a popup)
+                        alert(successMessage);
                         // You may want to refresh the grid to reflect the updated data
                         $("#grid").data("kendoGrid").dataSource.read();
                     },
@@ -104,6 +108,9 @@
                 });
             },
             remove: function (e) {
+                // Debugging
+                console.log("Removing row. Model:", e.model);
+
                 // Handle the delete operation
                 if (confirm("Are you sure you want to delete this record?")) {
                     $.ajax({

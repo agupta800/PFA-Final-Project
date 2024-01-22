@@ -58,6 +58,8 @@ namespace PFA.Controllers.Authentication
                     var result = await userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        TempData["success"] = "User SuccessFully Register";
+
                         string path = Path.Combine(webHostEnvironment.WebRootPath, "Template/Template.cshtml");
                         string htmlString = System.IO.File.ReadAllText(path);
                         htmlString = htmlString.Replace("{{title}}", "User Registration");
@@ -115,6 +117,8 @@ namespace PFA.Controllers.Authentication
 
                     if (result.Succeeded)
                     {
+                        TempData["success"] = "Login successful!";
+
                         return RedirectToAction("Index", "Home");
                     }
 

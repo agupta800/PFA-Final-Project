@@ -71,7 +71,9 @@ namespace PFA.Controllers
                 {
                     _context.JobPosts.Add(model);
                     _context.SaveChanges();
-                    return RedirectToAction("newJob");
+                    TempData["success"] = "Job added successfully.";
+
+                    return RedirectToAction("FindaJobs", "Home");
                 }
 
                 // If ModelState is not valid, return to the Create view with the validation errors
