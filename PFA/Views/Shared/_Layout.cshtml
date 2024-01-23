@@ -1,5 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Localization
 @inject IViewLocalizer Localizer
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+@inject UserManager<IdentityUser> userManager
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +60,7 @@
     <link rel="stylesheet" href="~/css/default-main.css" />
     <script src="~/js/kendo-ui-license.js"></script>
 
+
 </head>
 <body>
 
@@ -69,7 +74,7 @@
                     <a href="#home" class="site-logo">Dream Serve</a>
 
                     <!-- site menu/nav -->
-                    <ul>
+                    <ul class="ml-auto">
                         <li> <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -97,22 +102,61 @@
 
 
 
+
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="text font-weight-bold text-black" style="color: red;">Hello @userManager.GetUserName(User)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a asp-action="Logout" asp-controller="Account" class="nav-link text-danger" title="Logout">
+                                    <i class="fas fa-sign-out">Logout</i>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+
+                            <!-- Login button -->
+                            <!-- Login button -->
+                            <li class="nav-item" style="margin-right: 10px; margin-bottom: 30px; margin-top:10px">
+                                <a asp-action="Login" asp-controller="Account" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                    <b>@Localizer["Login"]</b>
+                                </a>
+                            </li>
+
+                            <!-- Register button -->
+                            <li class="nav-item" style="margin-top: 10px;">
+                                <a asp-action="Register" asp-controller="Account" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                                    <b>@Localizer["Register"]</b>
+                                </a>
+                            </li>
+
+
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="?culture=ne" title="Show page in Nepali">Nepali</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="?culture=he" title="Show page in Hindi">Hindi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" href="?culture=en" title="Show page in English">En</a>
+                            </li>
+                        }
+
                     </ul>
-                    <partial name="_LoginPartial" />
+
+
+
+                    @*    <partial name="_LoginPartial" /> *@
                     <!-- nav-toggler for mobile version only -->
                     <button class="nav-toggler">
                         <span></span>
                     </button>
                 </nav>
             </div>
-        </div><!-- navbar-area end -->
-        @*    <div class="intro-area">
-        <div class="container">
-        <h2>Responsive Navbar with pure JavaScript</h2>
-        <p>Please resize your browser and see the result</p>
         </div>
-        </div> *@
-
     </header>
 
     <div class="container">
