@@ -19,12 +19,28 @@
                     destroy: {
                         url: "/Admin/DeleteJob",
                         type: "POST",
-                        dataType: "json"
+                        dataType: "json", 
+                        success: function (result) {
+                            // Handle the success response for delete operation
+                            console.log("Data deleted successfully");
+                            var successMessage = "Job deleted successfully";
+
+                            // Display the success message (you can use it as needed)
+                            alert(successMessage);
+                            // Refresh the grid to reflect the updated data
+                            $("#grid").data("kendoGrid").dataSource.read();
+                        },
+                        error: function (xhr, status, error) {
+                            // Handle the error response
+                            console.error("Error deleting data:", error);
+                        }
                     }
                 },
+                    
+               
                 schema: {
                     model: {
-                        id: "JobID",
+                        id: "jobID",
                         fields: {
                             JobID: { type: "int" },
                             companyname: { type: "string" },
@@ -107,31 +123,7 @@
                     }
                 });
             },
-            remove: function (e) {
-                // Debugging
-                console.log("Removing row. Model:", e.model);
-
-                // Handle the delete operation
-                if (confirm("Are you sure you want to delete this record?")) {
-                    $.ajax({
-                        url: "/Admin/DeleteJob/" + e.model.JobID,
-                        type: "POST",
-                        success: function (result) {
-                            // Handle the success response
-                            console.log("Data deleted successfully");
-                            // Refresh the grid to reflect the updated data
-                            $("#grid").data("kendoGrid").dataSource.read();
-                        },
-                        error: function (xhr, status, error) {
-                            // Handle the error response
-                            console.error("Error deleting data:", error);
-                        }
-                    });
-                } else {
-                    // Prevent automatic deletion if the user cancels the confirmation
-                    e.preventDefault();
-                }
-            }
+            
         });
     });
 </script>

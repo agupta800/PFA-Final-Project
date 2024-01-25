@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Drawing;
 using System.Security.Policy;
 
@@ -9,7 +10,7 @@ namespace PFA.JobModel
     {
         [Key]
 
-
+        [Column("JobID")]
         public int JobID { get; set; }
 
 

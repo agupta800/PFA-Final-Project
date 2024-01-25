@@ -83,9 +83,10 @@ namespace PFA.Controllers
         }
 
         [HttpGet]
-        public IActionResult JobList()
+        public IActionResult JobList(JobPostModel model)
         {
-            return View();
+            _context.JobPosts.ToList();
+            return View(model);
         }
         public async Task<IActionResult> AllJobs()
         {
@@ -118,31 +119,35 @@ namespace PFA.Controllers
             }
         }
 
+
         [HttpPost]
-        public IActionResult DeleteJob(int id)
+        public ActionResult DeleteJob(int JobId)
         {
             try
             {
-                // Find the job post by ID
-                var jobPost = _context.JobPosts.Find(id);
-
-                if (jobPost == null)
+                // Implement your logic to delete the job record with the given id
+                // For example, using Entity Framework:
+                var jobToDelete = _context.JobPosts.Find(JobId);
+                if (jobToDelete != null)
                 {
-                    return Json(new { success = false, message = "Job not found" });
+                    _context.JobPosts.Remove(jobToDelete);
+                    _context.SaveChanges();
+                 
+
+                    return Json(new { Result = "OK", Message = "Job deleted successfully", RecordsAffected = 1 });
                 }
-
-                // Remove the job post from the context
-                _context.JobPosts.Remove(jobPost);
-                _context.SaveChanges(); // Save changes synchronously
-
-                return Json(new { success = true, message = "Data deleted successfully" });
+                else
+                {
+                    return Json(new { Result = "Error", Message = "Job not found" });
+                }
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Error deleting data: {ex.Message}, JobID: {id}");
-                return Json(new { success = false, message = "Error deleting data: " + ex.Message });
+                // Log the error
+                return Json(new { Result = "Error", Message = ex.Message });
             }
         }
+
 
 
 
