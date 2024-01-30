@@ -51,7 +51,7 @@
             {
                 <div class="single-job-items mb-30">
                     <div class="job-items">
-                        <div class="company-img">
+                        <div id ="CustomImg" class="company-img">
                             <a href='@item.applylink' target="_blank">
                                 <img src="@item.companyImageUrl" alt="@item.companyname" />
                             </a>
@@ -67,8 +67,9 @@
                             </ul>
                         </div>
                         <div class="items-link">
-                            <button class="bubbly-button" onclick="window.location='@item.applylink'">Apply Link</button>
+                            <button class="bubbly-button" onclick="window.open('@item.applylink', '_blank')">Apply Link</button> @* Apply link in new tab *@
                         </div>
+
                     </div>
                 </div>
             }
@@ -76,3 +77,18 @@
     </div>
    
 </main>
+
+<div id="ImgModel" class="modal justify-content-center">
+
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div>
+                <button type="button" id="CloseBtn" class="float-right m-1" style="background-color: #d9534f; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#c9302c'" onmouseout="this.style.backgroundColor='#d9534f'">&times;</button>
+            </div>
+
+            <div class="modal-body" id="ImgBody"></div>
+        </div>
+    </div>
+</div>
+
+

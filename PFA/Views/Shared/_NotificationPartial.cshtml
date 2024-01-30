@@ -1,4 +1,4 @@
-﻿<style>
+﻿@* <style>
     .content {
         margin-top: 65px; /* Adjust the value based on how much space you want between the navbar and content */
     }
@@ -31,5 +31,58 @@
                 <h2 class="text-center text-danger">@TempData["exception"]</h2>
             </div>
         </div>
+    }
+</div>
+ *@
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<style>
+    .content {
+        margin-top: 65px; /* Adjust the value based on how much space you want between the navbar and content */
+    }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Your navigation bar content goes here -->
+</nav>
+
+<div class="content">
+    <!-- Your content goes here -->
+    @if (TempData["success"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '@TempData["success"]',
+                text: '',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
+    }
+
+    @if (TempData["error"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: '@TempData["error"]',
+                text: '',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
+    }
+
+    @if (TempData["exception"] != null)
+    {
+        <script>
+            Swal.fire({
+                icon: 'warning',
+                title: '@TempData["exception"]',
+                text: '',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
     }
 </div>

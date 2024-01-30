@@ -34,27 +34,30 @@
 
                                 <thead>
                                     <tr>
+                                        <th>Id</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Role</th>
 @*                                         <th>Type</th>
  *@                                        <th>Status</th>
-                                        <th></th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var userViewModel in Model)
                                     {
                                         <tr>
+                                            <td>@userViewModel.User.Id</td>
                                             <td>@userViewModel.User.UserName</td>
                                             <td>@userViewModel.User.Email</td>
                                             <td>@userViewModel.RoleName</td>
 @*                                             <td>@userViewModel.RoleName</td> <!-- You may need to replace this with actual user type -->
  *@                                            <td>Active</td> <!-- You may need to replace this with actual user status -->
                                             <td class="text-end">
-                                                <a href="#" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
-                                                <a href="#" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
+                                                <a href="@Url.Action("Edit", "Account", new { id = userViewModel.IdentityId })" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
+                                                <a href="@Url.Action("Delete", "Account", new { id = userViewModel.User.Id})" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
                                             </td>
+
                                         </tr>
                                     }
                                 </tbody>
@@ -84,4 +87,6 @@
 </div>
 @section scripts {
     <script src="~/js/Search.js"></script>
+
 }
+

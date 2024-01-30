@@ -145,6 +145,8 @@ namespace PFA.Controllers.Authentication
         public async Task<IActionResult> Logout()
         {
             await signInmanager.SignOutAsync();
+            TempData["success"] = "You have been successfully logged out.";
+
             return RedirectToAction("Login", "Account");
         }
 

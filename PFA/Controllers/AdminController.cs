@@ -92,7 +92,7 @@ namespace PFA.Controllers
         {
             var allData = await _context.JobPosts.ToListAsync();
             return Json(allData);
-
+            
         }
 
         [HttpGet]
@@ -119,35 +119,30 @@ namespace PFA.Controllers
             }
         }
 
-
-        [HttpPost]
         public ActionResult DeleteJob(int JobId)
         {
             try
             {
-                // Implement your logic to delete the job record with the given id
-                // For example, using Entity Framework:
                 var jobToDelete = _context.JobPosts.Find(JobId);
                 if (jobToDelete != null)
                 {
                     _context.JobPosts.Remove(jobToDelete);
                     _context.SaveChanges();
-                 
 
-                    return Json(new { Result = "OK", Message = "Job deleted successfully", RecordsAffected = 1 });
+                    TempData["success"] = "Job deleted successfully";
                 }
                 else
                 {
-                    return Json(new { Result = "Error", Message = "Job not found" });
+                    TempData["ErrorMessage"] = "Job not found";
                 }
             }
             catch (Exception ex)
             {
-                // Log the error
-                return Json(new { Result = "Error", Message = ex.Message });
+                TempData["ErrorMessage"] = "An error occurred while deleting the job: " + ex.Message;
             }
-        }
 
+            return RedirectToAction("Index"); // Redirect to a relevant action, such as the action that renders your view
+        }
 
 
 

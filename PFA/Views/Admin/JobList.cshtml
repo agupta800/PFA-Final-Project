@@ -19,25 +19,9 @@
                     destroy: {
                         url: "/Admin/DeleteJob",
                         type: "POST",
-                        dataType: "json", 
-                        success: function (result) {
-                            // Handle the success response for delete operation
-                            console.log("Data deleted successfully");
-                            var successMessage = "Job deleted successfully";
-
-                            // Display the success message (you can use it as needed)
-                            alert(successMessage);
-                            // Refresh the grid to reflect the updated data
-                            $("#grid").data("kendoGrid").dataSource.read();
-                        },
-                        error: function (xhr, status, error) {
-                            // Handle the error response
-                            console.error("Error deleting data:", error);
-                        }
+                        dataType: "json"
                     }
                 },
-                    
-               
                 schema: {
                     model: {
                         id: "jobID",
@@ -123,7 +107,7 @@
                     }
                 });
             },
-            
+     
         });
     });
 </script>

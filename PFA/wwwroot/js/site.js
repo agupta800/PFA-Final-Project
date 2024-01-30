@@ -83,3 +83,19 @@ $(document).ready(function () {
 $(window).on('load', function () {
     hideBusyIndication();
 });
+
+
+//Popup to show image
+$('#CustomImg img').on('mouseenter', function () {
+    $('#ImgModel').show();
+    var html = '<img src="' + $(this).attr('src') + '" style="width: 450px; height: 450px;">';
+    $('#ImgBody').html(html);
+});
+
+//$('#CustomImg img').on('mouseleave', function () {
+//    $('#ImgModel').hide();
+//});
+
+$('#CloseBtn').on('click', function () {
+    $('#ImgModel').hide();
+});
