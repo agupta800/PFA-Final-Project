@@ -32,7 +32,10 @@
  *@            </div>
             <ul class="list-unstyled components text-secondary">
                 <li>
-                    <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+                <li>
+                    <a asp-controller="Account" asp-action="Index"><i class="fas fa-user-shield"></i><span>DashBoard</span></a>
+
+                </li>
                 </li>
                 <li>
                     <a href="forms.html"><i class="fas fa-file-alt"></i> Forms</a>
@@ -108,9 +111,7 @@
                 <li>
                     <a asp-controller="admin" asp-action="JobList"><i class="fas fa-user-shield"></i><span>Created Job List</span></a>
                 </li>
-                <li>
-                    <a href="settings.html"><i class="fas fa-cog"></i>Settings</a>
-                </li>
+             
             </ul>
         </nav>
         <div id="body" class="active">
@@ -161,7 +162,7 @@
                 </div>
             </nav>
             <!-- end of navbar navigation -->
-            <div class="content">
+           @*  <div class="content">
                 <div class="container">
                   
                     <div class="row">
@@ -170,43 +171,45 @@
                                 <div class="content">
                                     <div class="row">
                                         <div class="dfd text-center">
-                                            <i class="blue large-icon mb-2 fas fa-thumbs-up"></i>
-                                            <h4 class="mb-0">+21,900</h4>
-                                            <p class="text-muted">FACEBOOK PAGE LIKES</p>
+                                            <i class="blue large-icon mb-2 fas fa-chart-bar"></i>
+                                            <h4 class="mb-0">+21,90</h4>
+                                            <p class="text-muted">Analytics</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-@*                         @RenderBody()
- *@                        <div class="col-sm-6 col-md-6 col-lg-3">
+                        </div> *@
+                         @RenderBody()
+  
+                       @*  <div class="col-sm-6 col-md-6 col-lg-3">
                             <div class="card">
                                 <div class="content">
                                     <div class="row">
                                         <div class="dfd text-center">
-                                            <i class="orange large-icon mb-2 fas fa-reply-all"></i>
+                                            <i class="orange large-icon mb-2 fas fa-user-shield"></i>
                                             <h4 class="mb-0">+22,566</h4>
-                                            <p class="text-muted">INSTAGRAM FOLLOWERS</p>
+                                            <p class="text-muted">New Job Creation List</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 col-lg-3">
+                        </div> *@
+@*                         <div class="col-sm-6 col-md-6 col-lg-3">
                             <div class="card">
                                 <div class="content">
                                     <div class="row">
                                         <div class="dfd text-center">
-                                            <i class="grey large-icon mb-2 fas fa-envelope"></i>
-                                            <h4 class="mb-0">+15,566</h4>
-                                            <p class="text-muted">E-MAIL SUBSCRIBERS</p>
+                                            <i class="grey large-icon mb-2 fas fa-users"></i>
+                                            <h4 class="mb-0">Total Registered Users: @ViewBag.NumberOfUsers</h4>
+
+                                            <p class="text-muted">Users</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
-                        @RenderBody()
+ *@
+                  
                        
                                     </div>
                                 </div>

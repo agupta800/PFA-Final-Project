@@ -3,8 +3,13 @@
     Layout = "~/Views/Shared/_AdminPartial.cshtml";
 }
 
-<h1>JobList</h1>
-<div id="grid"></div>
+<div id="GetJobCount" style="text-align: center;">
+    <h1>JobList</h1>
+@*     <p>Total Job Posts: <span id="totalCount"></span></p>
+ *@</div>
+
+
+<div id="grid" class="col-10 offset-1 "></div>
 
 <!-- Include necessary scripts -->
 <script>
@@ -109,5 +114,19 @@
             },
      
         });
+        grid.dataSource.bind("change", function () {
+            // Fetch job count after a data item is updated
+            $.ajax({
+                url: "/Admin/GetJobCount",
+                type: "GET",
+                success: function (result) {
+                    $("#totalCount").text(result);
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching job count:", error);
+                }
+            });
+        });
     });
+    
 </script>

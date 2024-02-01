@@ -92,9 +92,9 @@ $('#CustomImg img').on('mouseenter', function () {
     $('#ImgBody').html(html);
 });
 
-//$('#CustomImg img').on('mouseleave', function () {
-//    $('#ImgModel').hide();
-//});
+$('#CustomImg img').on('mouseleave', function () {
+    $('#ImgModel').hide();
+});
 
 $('#CloseBtn').on('click', function () {
     $('#ImgModel').hide();

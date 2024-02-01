@@ -22,6 +22,7 @@ builder.Services.AddDbContext<ApplicationContext>(option =>
 
     });
 
+
 builder.Services.AddDbContext<PFA.Data.Localize.LocalizeDbContext>(optionsAction: options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("conn")));
@@ -51,6 +52,9 @@ builder.Services.AddControllers(config =>
 
 builder.Services.ConfigureApplicationCookie(option =>
     {
+        option.AccessDeniedPath = "/Account/AccessDenied";
+        option.LogoutPath = "/Account/Logout";
+
         option.AccessDeniedPath = "/Account/Login";
         option.LogoutPath = "/Account/Login";
         option.LogoutPath = "/Account/Logout";

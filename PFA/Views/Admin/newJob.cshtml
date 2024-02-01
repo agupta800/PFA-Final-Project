@@ -1,25 +1,35 @@
-﻿@model IEnumerable<JobPostModel>
+﻿@model JobPostModel
 
 @{
     ViewData["Title"] = "JobList";
     Layout = "~/Views/Shared/_AdminPartial.cshtml";
 }
 
-<h1>NewJob</h1>
+<div id="" style="text-align: center;">
+    <h1><u>Create New Job</u></h1>
+    @*     <p>Total Job Posts: <span id="totalCount"></span></p>
+    *@
+</div>
 
 
 
-<div asp-validation-summary="All" class="text-danger"></div>
+<div asp-validation-summary="All" class="col-4 mx-auto text-danger"></div>
 
 
 <div class="container mt-4">
     <form asp-action="NewJob" method="POST" id="newJob_form">
-        @Html.AntiForgeryToken()
+@*         @Html.AntiForgeryToken() *@
 
         <!-- Your existing form fields -->
 
+      @*   <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Corrected syntax -->
 
-
+        <div class="mb-3">
+            <label asp-for="UserName">@Localizer["UserName"]</label> <!-- Corrected syntax -->
+            <input type="text" class="form-control" asp-for="UserName" placeholder="@Localizer["Enter UserName"]" />
+            <span asp-validation-for="UserName" class="text-danger"></span> <!-- Corrected syntax -->
+        </div>
+ *@
 
         <div class="row">
             <div class="col-md-12">
@@ -30,33 +40,46 @@
                     <div class="card-body">
 
                         <div class="mb-3">
-                            <label for="companyname" class="form-label">Company Name</label>
-                            <input type="text" id="companyname" name="companyname" class="form-control" placeholder="Enter Company Name" required />
+                            <label asp-for="companyname" class="form-label">Company Name</label>
+                            <input type="text"  id="companyname" asp-for="companyname" class="form-control" placeholder="Enter Company Name" />
+                            <span asp-validation-for="companyname" class="text-danger"></span>
+
+
                         </div>
 
                         <div class="mb-3">
                             <label for="jobTitle" class="form-label">Job Title</label>
-                            <input type="text" id="jobTitle" name="jobTitle" class="form-control" placeholder="Enter Job title" required />
+                            <input type="text" id="jobTitle" asp-for="jobTitle" class="form-control" placeholder="Enter Job title" />
+                            <span asp-validation-for="jobTitle" class="text-danger"></span>
+
                         </div>
 
                         <div class="mb-3">
                             <label for="applylink" class="form-label">Apply link</label>
-                            <input type="text" id="applylink" name="applylink" class="form-control" placeholder="Enter apply link" required />
+                            <input type="text" id="applylink" asp-for="applylink" class="form-control" placeholder="Enter apply link" />
+                            <span asp-validation-for="applylink" class="text-danger"></span>
+
                         </div>
 
                         <div class="mb-3">
-                            <label for="txtDescription" class="form-label">Description</label>
-                            <textarea id="txtDescription" name="txtDescription" class="form-control" rows="4" placeholder="Enter Description" required></textarea>
+                            <label asp-for="txtDescription" class="form-label">Description</label>
+                            <textarea id="txtDescription" asp-for="txtDescription" class="form-control" rows="4" placeholder="Enter Description"></textarea>
+                            <span asp-validation-for="txtDescription" class="text-danger"></span>
+
                         </div>
 
                         <div class="mb-3">
-                            <label for="inputDate" class="form-label">Last Date to apply</label>
-                            <input type="date" id="inputDate" name="inputDate" class="form-control" required />
+                            <label asp-for="inputDate" class="form-label">Last Date to apply</label>
+                            <input type="date" id="inputDate" asp-for="inputDate" class="form-control" />
+                            <span asp-validation-for="inputDate" class="text-danger"></span>
+
                         </div>
 
                         <div class="mb-3">
-                            <label for="companyImageUrl" class="form-label">Company Image URL</label>
-                            <input type="text" id="companyImageUrl" name="companyImageUrl" class="form-control" placeholder="Enter image URL" required />
+                            <label asp-for="companyImageUrl" class="form-label">Company Image URL</label>
+                            <input type="text" id="companyImageUrl" asp-for="companyImageUrl" class="form-control" placeholder="Enter image URL"/>
+                            <span asp-validation-for="companyImageUrl" class="text-danger"></span>
+
                         </div>
 
                         <div class="text-center">
@@ -68,17 +91,17 @@
             </div>
         </div>
     </form>
-
-    @if (TempData["msg"] != null)
-    {
+    @section Scripts {
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
         <script>
-            // Check if TempData["msg"] is not null before using it
-            var msg = '@TempData["msg"]';
-            if (msg !== null) {
-                alert(msg);
-            }
+            $(document).ready(function () {
+                // Remove validation error message when the user corrects the input
+                $("#companyname").on("input", function () {
+                    $("#companynameError").text("");
+                });
+            });
         </script>
-
-
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
     }
-</div>

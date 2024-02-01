@@ -14,29 +14,40 @@ namespace PFA.JobModel
         public int JobID { get; set; }
 
 
-        [Required]
-        [DisplayName("Enter the Company Name")]
+
+        [Display(Name = "Please Enter The Company Name")]
+        [Required(ErrorMessage = "Company Name is Required")]
         public string companyname { get; set; } = default!;
 
-        [Required]
+       
         [DisplayName("Enter the Job Title")]
+        [Required(ErrorMessage = "Job Title is Required")]
+
         public string jobTitle { get; set; } = default!;
 
-        [Required]
+        
         [DisplayName("Enter the ApplyLink")]
+        [Required(ErrorMessage = "ApplyLink is Required")]
+
         public string applylink { get; set; } = default!;
 
-        [Required]
+        
         [DisplayName("Enter the Description in Text")]
+        [Required(ErrorMessage = "Description is Required")]
+
         public string txtDescription { get; set; } = default!;
 
-        [Required]
+        
         [DisplayName("Enter the Date")]
+        [Required(ErrorMessage = "Date is Required")]
+
         public DateTime inputDate { get; set; } = default!;
 
         //companyImageUrl
-        [Required]
+        
         [DisplayName("Enter the Image Url")]
+        [Required(ErrorMessage = "Company Image is Required")]
+
         public string companyImageUrl { get; set; } = default!;
 
     }

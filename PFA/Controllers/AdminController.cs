@@ -28,7 +28,8 @@ namespace PFA.Controllers
         }
         public IActionResult Admin()
         {
-            return View();
+            //return View("~/Views/Account/Index.cshtml", ViewBag.NumberOfUsers);
+            return RedirectToAction("Index", "Account");
         }
 
 
@@ -144,6 +145,13 @@ namespace PFA.Controllers
             return RedirectToAction("Index"); // Redirect to a relevant action, such as the action that renders your view
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> GetJobCount()
+        {
+            var count = await _context.JobPosts.CountAsync();
+            return Json(count);
+        }
 
 
     }
