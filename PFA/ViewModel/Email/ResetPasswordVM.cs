@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
- namespace PFA.ViewModel
+namespace FineBlog.ViewModels
 {
     public class ResetPasswordVM
     {
@@ -10,7 +10,6 @@
         public string? NewPassword { get; set; }
         [Compare(nameof(NewPassword))]
         [Required]
-        public string? ConfirmPassword { get; set; }
-        public string? Email { get; set; }
+        public string? ConfirmPasswor { get; set; }
     }
 }

@@ -11,6 +11,7 @@ using PFA.Repository.Service;
 using PFA.ViewModel;
 using PFA.JobModel;
 using System;
+using AspNetCoreHero.ToastNotification.Abstractions;
 namespace PFA.Controllers
 {
     [Authorize(Roles = "Admin")]
@@ -20,11 +21,14 @@ namespace PFA.Controllers
         private readonly JobPostDbContext _context;
         private readonly ILogger<AdminController> _logger;
 
-        public AdminController(UserManager<IdentityUser> userManager, JobPostDbContext context, ILogger<AdminController> logger)
+        public INotyfService _notification { get; }
+
+        public AdminController(UserManager<IdentityUser> userManager, JobPostDbContext context, ILogger<AdminController> logger, INotyfService notyfService)
         {
             _userManager = userManager;
             _context = context;
             _logger = logger;
+            _notification = notyfService;
         }
         public IActionResult Admin()
         {
@@ -104,14 +108,15 @@ namespace PFA.Controllers
 
 
 
-        public async Task<IActionResult> UpdateJobs(IEnumerable<JobPostModel> models)
+        public async Task<IActionResult> Updatejob(JobPostModel models)
         {
             try
             {
                 _context.Update(models);
                 await _context.SaveChangesAsync(); // Save changes asynchronously
+                _notification.Success("Data Updated Sucessfully");
 
-                return Json(new { success = true, message = "Data updated successfully" });
+                return Json(new { success = true });
             }
             catch (Exception ex)
             {
@@ -130,11 +135,13 @@ namespace PFA.Controllers
                     _context.JobPosts.Remove(jobToDelete);
                     _context.SaveChanges();
 
-                    TempData["success"] = "Job deleted successfully";
+                    _notification.Success("Job deleted Sucessfully");
+                    return Json(new { success = true });
+
                 }
                 else
                 {
-                    TempData["ErrorMessage"] = "Job not found";
+                    _notification.Error("Job not found");
                 }
             }
             catch (Exception ex)

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PFA.Blog_Model;
+using PFA.Blog_ModelPFA;
 
 namespace PFA.Data
 {
@@ -12,5 +14,9 @@ namespace PFA.Data
         {
             base.OnModelCreating(builder);
         }
+        //public DbSet<ApplicationUser>? ApplicationUsers { get; set; }
+        //public DbSet<Post>? Posts { get; set; }
+        //public DbSet<Page>? Pages { get; set; }
+        //public DbSet<Setting>? Settings { get; set; }
     }
 }

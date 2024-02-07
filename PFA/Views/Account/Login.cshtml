@@ -33,9 +33,9 @@
             <input type="checkbox" id="RememberMe" asp-for="RememberMe" />@Localizer["Remember Me"]
         </label>
     </div>
-    <div class="mt-3">
-        <a asp-controller="Account" asp-action="ForgotPassword">@Localizer["Forgot Password"]</a>
-    </div>
+  @*   <div class="mt-3">
+        <a asp-controller="Account" asp-action="ResetPassword" asp-route-id="@Model.UserId">Reset Password</a>
+    </div> *@
 
     <div class="float-end">
         <button type="submit" class="btn btn-primary rounded-pill py-3 px-4 d-none d-lg-block" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">

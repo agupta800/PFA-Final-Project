@@ -233,9 +233,17 @@
     <script src="~/js/kendo.appbar.min.js"></script>
     <script src="~/js/kendo.form.min.js"></script>
     <script src="~/js/kendo-ui-license.js"></script>
-    
-    @RenderSection("scripts", required: false)
+    @await Component.InvokeAsync("Notyf")
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.3.0/dist/notyf.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3.3.0/dist/notyf.min.js" integrity="sha384-fST/R63JCcAVLUqQUl5ZUqMsIZqA+vl43A7Qy7/qXE6LlXVVuC3w4Xl+8oXu94eE" crossorigin="anonymous"></script>
 
+    <!-- Add this line to the head section of your HTML -->
+
+    @RenderSection("scripts", required: false)
+    @section scripts {
+        @await RenderSectionAsync("Scripts", required: false)
+
+    }
 
  </body>
 

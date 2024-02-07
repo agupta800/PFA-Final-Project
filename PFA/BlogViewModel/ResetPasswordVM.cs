@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
- namespace PFA.ViewModel
+namespace PFA.BlogViewModel
 {
     public class ResetPasswordVM
     {
@@ -11,6 +11,5 @@
         [Compare(nameof(NewPassword))]
         [Required]
         public string? ConfirmPassword { get; set; }
-        public string? Email { get; set; }
     }
 }

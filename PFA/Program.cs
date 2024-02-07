@@ -1,5 +1,7 @@
 using Arebis.Core.AspNet.Mvc.Localization;
 using Arebis.Core.Localization;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PFA.Data;
@@ -64,6 +66,7 @@ builder.Services.ConfigureApplicationCookie(option =>
 
     });
 
+builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopRight; });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews()
@@ -87,7 +90,7 @@ var localizationOptions = new RequestLocalizationOptions()
     .AddSupportedUICultures(supportedCultures);
 
 app.UseRequestLocalization(localizationOptions);
-
+app.UseNotyf();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

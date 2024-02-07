@@ -47,13 +47,13 @@
                 serverFiltering: true,
                 serverSorting: true
             },
-            height: 400,
+            height:630,
             filterable: true,
             sortable: true,
             pageable: true,
             batch: true,
             editable: {
-                mode: "inline",
+                mode: "popup",
                 window: {
                     title: "Edit Job Record",
                     animation: true
@@ -61,7 +61,7 @@
             },
             toolbar: ["create", "save", "cancel"],
             columns: [
-                { command: ["edit", "destroy"], title: "Action", width: 150 },
+                { command: ["edit", "destroy"], title: "Action", width: 180 },
                 { field: "companyname", title: "Company Name", width: 150 },
                 { field: "jobTitle", title: "Job Title", width: 150 },
                 { field: "applylink", title: "Apply Link", width: 150 },
@@ -100,10 +100,10 @@
                     success: function (result) {
                         // Handle the success response
                         console.log("Data updated successfully");
-                        var successMessage = "Data Updated Successfully";
+                        // var successMessage = "Data Updated Successfully";
 
-                        // You can use successMessage as needed (e.g., display it in a popup)
-                        alert(successMessage);
+                        // // You can use successMessage as needed (e.g., display it in a popup)
+                        // alert(successMessage);
                         // You may want to refresh the grid to reflect the updated data
                         $("#grid").data("kendoGrid").dataSource.read();
                     },
@@ -144,7 +144,7 @@
 
 <!-- Your HTML code -->
 
-<textarea id="editor1" rows="10" cols="80">
+@* <textarea id="editor1" rows="10" cols="80">
     This is my textarea to be replaced with CKEditor 4.
 </textarea>
 <button onclick="myFunction()">Submit</button>
@@ -170,4 +170,4 @@
 <div id="output" style="margin-top: 20px;">
     <!-- The content from CKEditor will be displayed here with HTML rendering -->
 </div>
-
+ *@

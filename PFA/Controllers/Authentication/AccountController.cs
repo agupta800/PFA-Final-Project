@@ -8,10 +8,12 @@ using PFA.Repository.Service;
 using PFA.ViewModel;
 using System.Text.Encodings.Web;
 using Microsoft.Extensions.Logging;
+using AspNetCoreHero.ToastNotification.Abstractions;
 
 
 namespace PFA.Controllers.Authentication
 {
+    //[Authorize(Roles = "Admin")]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -20,11 +22,11 @@ namespace PFA.Controllers.Authentication
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly IStringLocalizer _localizer;
         private readonly ILogger<AccountController> _logger;
+        public INotyfService _notification { get; }
 
 
 
-
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender EmailSender, IWebHostEnvironment webHostEnvironment, IStringLocalizer localizer, ILogger<AccountController> logger)
+        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager, IEmailSender EmailSender, IWebHostEnvironment webHostEnvironment, IStringLocalizer localizer, ILogger<AccountController> logger, INotyfService notyfService)
         {
             this.userManager = userManager;
             this.signInmanager = signInManager;
@@ -33,7 +35,7 @@ namespace PFA.Controllers.Authentication
             _localizer = localizer;
             _logger = logger;  // Injected ILogger instance
 
-
+            _notification = notyfService;
 
         }
         public IActionResult Index()
@@ -67,6 +69,7 @@ namespace PFA.Controllers.Authentication
                     {
                         UserName = model.UserName,
                         Email = model.Email,
+                        
 
                     };
                     var result = await userManager.CreateAsync(user, model.Password);
@@ -110,7 +113,7 @@ namespace PFA.Controllers.Authentication
             return View();
         }
 
-      
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)
         {
@@ -159,6 +162,8 @@ namespace PFA.Controllers.Authentication
         public async Task<IActionResult> Logout()
         {
             await signInmanager.SignOutAsync();
+            _notification.Success("Logout sucessfully");
+
             TempData["success"] = "You have been successfully logged out.";
 
             return RedirectToAction("Login", "Account");
@@ -194,8 +199,8 @@ namespace PFA.Controllers.Authentication
             var result = await userManager.DeleteAsync(user);
             if (result.Succeeded)
             {
-                TempData["success"] = "User deleted successfully!";
-                return RedirectToAction("Index", "Home");
+                _notification.Success("User Deleted Sucessfully");
+                return RedirectToAction("UserList", "Admin");
             }
 
             // If there are errors in the delete operation, add them to ModelState
@@ -206,63 +211,55 @@ namespace PFA.Controllers.Authentication
 
             return View("Delete", user);
         }
-        [AllowAnonymous]
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
+      
 
+       
+        [HttpGet]
+        public async Task<IActionResult> ResetPassword(string id)
+        {
+            var existingUser = await userManager.FindByIdAsync(id);
+            if (existingUser == null)
+            {
+               _notification.Error("User doesnot exsits");
+                //TempData["error"] = "User Doesnot exist";
+                return View();
+            }
+            var vm = new ResetPasswordVM()
+            {
+                Id = existingUser.Id,
+                UserName = existingUser.UserName,
+                Email = existingUser.Email,
+                
+            };
+            return View(vm);
+        }
         [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-
-
-        public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        public async Task<IActionResult> ResetPassword(ResetPasswordVM vm)
         {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    var user = await userManager.FindByEmailAsync(model.Email);
-
-                    if (user == null || !(await userManager.IsEmailConfirmedAsync(user)))
-                    {
-                        // Don't reveal that the user does not exist or is not confirmed
-                        return View("ForgotPasswordConfirmation");
-                    }
-
-                    // Generate a password reset token
-                    string code = await userManager.GeneratePasswordResetTokenAsync(user);
-
-                    // Construct the password reset callback URL
-                    var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Scheme);
-
-                    // Send the password reset email using IEmailSender
-                    var emailBody = $"Please reset your password by clicking <a href=\"{HtmlEncoder.Default.Encode(callbackUrl)}\">here</a>";
-                    await emailSender.EmailSenderAsync(model.Email, "Reset Your Password", emailBody);
-
-                    _logger.LogInformation("Password reset email sent successfully.");
-
-                    return RedirectToAction("ForgotPasswordConfirmation");
-                }
+            if (!ModelState.IsValid)
+            { 
+                return View(vm); 
             }
-            catch (Exception ex)
+            var existingUser = await userManager.FindByIdAsync(vm.Id);
+            if (existingUser == null)
             {
-                _logger.LogError(ex, "An error occurred in the ForgotPassword method.");
-                // Log the exception and handle it appropriately (e.g., show a generic error page)
-                return View("Error");
+                _notification.Error("User doesnot exist");
+                //TempData["error"] = "User Doesnot exist";
+
+                return View(vm);
             }
+            var token = await userManager.GeneratePasswordResetTokenAsync(existingUser);
+            var result = await userManager.ResetPasswordAsync(existingUser, token, vm.NewPassword);
+            if (result.Succeeded)
+            {
+                _notification.Success("Password reset succussfully");
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
+                return RedirectToAction("UserList" ,"Admin" );
+            }
+            return View(vm);
         }
-        [AllowAnonymous]
-        public IActionResult ForgotPasswordConfirmation()
-        {
-            return View();
-        }
-
+    }
 
     }
-}
+
 

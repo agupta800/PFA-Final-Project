@@ -40,7 +40,8 @@
                                         <th>Role</th>
 @*                                         <th>Type</th>
  *@                                        <th>Status</th>
-                                        
+                                        <th style="text-align: center;">Actions</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -56,6 +57,9 @@
                                             <td class="text-end">
                                                 <a href="@Url.Action("Edit", "Account", new { id = userViewModel.IdentityId })" class="btn btn-outline-info btn-rounded"><i class="fas fa-pen"></i></a>
                                                 <a href="@Url.Action("Delete", "Account", new { id = userViewModel.User.Id})" class="btn btn-outline-danger btn-rounded"><i class="fas fa-trash"></i></a>
+
+                                                <a class="btn btn-custom" asp-controller="Account" asp-action="ResetPassword" asp-route-id="@userViewModel.User.Id">Reset Password</a>
+
                                             </td>
 
                                         </tr>

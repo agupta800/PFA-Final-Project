@@ -4,7 +4,7 @@ namespace PFA.ViewModel
 {
     public class LoginVM
     {
-
+        public string? Username { get; set; }
         [EmailAddress]
         [Required(ErrorMessage = "Please Enter Email")]
 
