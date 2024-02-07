@@ -20,6 +20,19 @@ function navLinkClick() {
     }
 }
 
+// Additional code for responsiveness
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        // If the window width is greater than 768 pixels, ensure the navigation menu is open
+        navMenu.classList.add('open');
+    } else {
+        // If the window width is 768 pixels or less, close the navigation menu
+        navToggler.classList.remove('toggler-open');
+        navMenu.classList.remove('open');
+    }
+});
+
+
 // Toggle password visibility
 
 

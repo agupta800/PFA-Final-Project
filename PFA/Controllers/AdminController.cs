@@ -104,7 +104,7 @@ namespace PFA.Controllers
 
 
 
-        public async Task<IActionResult> Updatejob(JobPostModel models)
+        public async Task<IActionResult> UpdateJobs(IEnumerable<JobPostModel> models)
         {
             try
             {
