@@ -38,6 +38,8 @@ namespace PFA.Controllers.Authentication
             _notification = notyfService;
 
         }
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Index()
         {
             int numberofUsers = userManager.Users.Count();
@@ -135,8 +137,10 @@ namespace PFA.Controllers.Authentication
                     if (result.Succeeded)
                     {
                         TempData["success"] = "Login successful!";
-
+                        _notification.Success("Login sucessfully");
+                      
                         return RedirectToAction("Index", "Home");
+                      
                     }
 
                     if (result.IsLockedOut)
@@ -258,6 +262,12 @@ namespace PFA.Controllers.Authentication
             }
             return View(vm);
         }
+
+        public IActionResult AccessDenited()
+        {
+            return View();
+        }
+
     }
 
     }

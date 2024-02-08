@@ -1,4 +1,7 @@
-﻿
+﻿@inject SignInManager<IdentityUser> signInManager
+@inject UserManager<IdentityUser> userManager
+@using Microsoft.AspNetCore.Identity
+
 <!doctype html>
 
 <html lang="en">
@@ -21,6 +24,8 @@
 
     <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/default-main.css" />
+    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet">
+
 
 </head>
 
@@ -143,7 +148,7 @@
                         <li class="nav-item dropdown">
                             <div class="nav-dropdown">
                                 <a href="#" id="nav2" class="nav-item nav-link dropdown-toggle text-secondary" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fas fa-user"></i> <span>Awadhesh</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i>
+                                    <i class="fas fa-user"></i> <span>@userManager.GetUserName(User)</span> <i style="font-size: .8em;" class="fas fa-caret-down"></i>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-end nav-link-menu">
                                     <ul class="nav-list">
@@ -236,7 +241,20 @@
     @await Component.InvokeAsync("Notyf")
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.3.0/dist/notyf.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/notyf@3.3.0/dist/notyf.min.js" integrity="sha384-fST/R63JCcAVLUqQUl5ZUqMsIZqA+vl43A7Qy7/qXE6LlXVVuC3w4Xl+8oXu94eE" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/7qjkjvz7eegr5schf3b8iwvemcxjb82zvn5nvbm02u8l4xkb/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+        });
+
+        tinymce.init({
+            selector: '#richEditor',
+            plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+        });
+    </script>
     <!-- Add this line to the head section of your HTML -->
 
     @RenderSection("scripts", required: false)
