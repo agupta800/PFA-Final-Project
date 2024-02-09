@@ -2,11 +2,11 @@
     ViewData["Title"] = "JobList";
     Layout = "~/Views/Shared/_AdminPartial.cshtml";
 }
-<script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <div id="GetJobCount" style="text-align: center;">
     <h1>JobList</h1>
-@*     <p>Total Job Posts: <span id="totalCount"></span></p>
- *@</div>
+    @*     <p>Total Job Posts: <span id="totalCount"></span></p>
+    *@
+</div>
 
 
 
@@ -47,7 +47,7 @@
                 serverFiltering: true,
                 serverSorting: true
             },
-            height:630,
+            height: 630,
             filterable: true,
             sortable: true,
             pageable: true,
@@ -120,7 +120,7 @@
                     this.updateElement();
                 });
             },
-     
+
         });
         grid.dataSource.bind("change", function () {
             // Fetch job count after a data item is updated
@@ -136,38 +136,6 @@
             });
         });
     });
-    
+
 </script>
 
-<!-- Include CKEditor script -->
-<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
-
-<!-- Your HTML code -->
-
-@* <textarea id="editor1" rows="10" cols="80">
-    This is my textarea to be replaced with CKEditor 4.
-</textarea>
-<button onclick="myFunction()">Submit</button>
-
-<script>
-    // Replace the <textarea id="editor1"> with a CKEditor 4 instance, using default configuration.
-    CKEDITOR.replace('editor1');
-
-    function myFunction() {
-        // Get the content from CKEditor
-        var data = CKEDITOR.instances.editor1.getData();
-
-        // Update the content in the same editor
-        CKEDITOR.instances.editor1.setData(data);
-
-        // Display the content in the output area with HTML rendering
-        document.getElementById("output").innerHTML = data;
-    }
-</script>
-
-<!-- Your existing JavaScript code -->
-
-<div id="output" style="margin-top: 20px;">
-    <!-- The content from CKEditor will be displayed here with HTML rendering -->
-</div>
- *@

@@ -2,13 +2,13 @@
 
 
 @{
-     ViewData["Title"] = "Updatejob";
+    ViewData["Title"] = "Updatejob";
     Layout = "~/Views/Shared/_AdminPartial.cshtml";
 }
 
 
 <div class="container mt-4">
-    <form asp-action="Updatejob" method="POST" >   
+    <form asp-action="Updatejob" method="POST">
 
         <div class="row">
             <div class="col-md-12">
@@ -71,9 +71,8 @@
         </div>
     </form>
 
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     }
 
-   

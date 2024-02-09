@@ -71,7 +71,7 @@ namespace PFA.Controllers.Authentication
                     {
                         UserName = model.UserName,
                         Email = model.Email,
-                        
+
 
                     };
                     var result = await userManager.CreateAsync(user, model.Password);
@@ -138,9 +138,9 @@ namespace PFA.Controllers.Authentication
                     {
                         TempData["success"] = "Login successful!";
                         _notification.Success("Login sucessfully");
-                      
+
                         return RedirectToAction("Index", "Home");
-                      
+
                     }
 
                     if (result.IsLockedOut)
@@ -215,16 +215,16 @@ namespace PFA.Controllers.Authentication
 
             return View("Delete", user);
         }
-      
 
-       
+
+
         [HttpGet]
         public async Task<IActionResult> ResetPassword(string id)
         {
             var existingUser = await userManager.FindByIdAsync(id);
             if (existingUser == null)
             {
-               _notification.Error("User doesnot exsits");
+                _notification.Error("User doesnot exsits");
                 //TempData["error"] = "User Doesnot exist";
                 return View();
             }
@@ -233,7 +233,7 @@ namespace PFA.Controllers.Authentication
                 Id = existingUser.Id,
                 UserName = existingUser.UserName,
                 Email = existingUser.Email,
-                
+
             };
             return View(vm);
         }
@@ -241,8 +241,8 @@ namespace PFA.Controllers.Authentication
         public async Task<IActionResult> ResetPassword(ResetPasswordVM vm)
         {
             if (!ModelState.IsValid)
-            { 
-                return View(vm); 
+            {
+                return View(vm);
             }
             var existingUser = await userManager.FindByIdAsync(vm.Id);
             if (existingUser == null)
@@ -258,7 +258,7 @@ namespace PFA.Controllers.Authentication
             {
                 _notification.Success("Password reset succussfully");
 
-                return RedirectToAction("UserList" ,"Admin" );
+                return RedirectToAction("UserList", "Admin");
             }
             return View(vm);
         }
@@ -270,6 +270,6 @@ namespace PFA.Controllers.Authentication
 
     }
 
-    }
+}
 
 

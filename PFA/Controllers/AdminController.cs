@@ -103,7 +103,7 @@ namespace PFA.Controllers
         {
             var allData = await _context.JobPosts.ToListAsync();
             return Json(allData);
-            
+
         }
 
         [HttpGet]
@@ -161,10 +161,10 @@ namespace PFA.Controllers
 
         public IActionResult DeleteJob1(int id)
         {
-            var emp = _context.JobPosts.FirstOrDefault(x => x.JobID== id);
+            var emp = _context.JobPosts.FirstOrDefault(x => x.JobID == id);
             _context.JobPosts.Remove(emp);
             _context.SaveChanges();
-                                _notification.Success("Job deleted Sucessfully");
+            _notification.Success("Job deleted Sucessfully");
 
             return RedirectToAction("JobListV");
 

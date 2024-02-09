@@ -7,22 +7,7 @@
 
 
 <main>
-    <!-- Hero Area Start-->
- @*    <div class="slider-area">
-        <div class="single-slider section-overly slider-height2 d-flex align-items-center"
-             style="background-image: url('@Url.Content("~/assets/img/about1.jpg")')">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="hero-cap text-center">
-                            <h2><b>Get your Dream</b></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-        </div>
-    </div> *@
 
     <div class="container-xxl py-5 bg-dark page-header mb-8">
         <div class="container my-5 pt-5 pb-4">
@@ -38,11 +23,11 @@
     </div>
     <!-- Header End -->
     <!-- Jobs Start -->
-     
-            <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.4s">Job Listing</h1>
-     
-                 
-                
+
+    <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.4s">Job Listing</h1>
+
+
+
     <!-- Hero Area End -->
     <!-- Job List Area Start -->
 
@@ -52,7 +37,7 @@
             {
                 <div class="single-job-items mb-30">
                     <div class="job-items">
-                        <div id="CustomImg" class="company-img" >
+                        <div id="CustomImg" class="company-img">
                             <a href='@item.applylink' target="_blank">
                                 <img src="@item.companyImageUrl" alt="@item.companyname " />
                             </a>
@@ -77,12 +62,12 @@
             }
         </div>
     </div>
-   
+
 </main>
 
 <div id="ImgModel" class="modal justify-content-center">
 
-    <div class="modal-dialog" >
+    <div class="modal-dialog">
         <div class="modal-content">
             <div>
                 <button type="button" id="CloseBtn" class="float-right m-1" style="background-color: #d9534f; color: #fff; border: none; border-radius: 5px; padding: 5px 10px; cursor: pointer; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#c9302c'" onmouseout="this.style.backgroundColor='#d9534f'">&times;</button>

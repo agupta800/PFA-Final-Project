@@ -19,18 +19,17 @@
 
 <div class="container mt-4">
     <form asp-action="NewJob" method="POST" id="newJob_form">
-@*         @Html.AntiForgeryToken() *@
+        @*         @Html.AntiForgeryToken() *@
 
         <!-- Your existing form fields -->
-
-      @*   <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Corrected syntax -->
+        @*   <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Corrected syntax -->
 
         <div class="mb-3">
-            <label asp-for="UserName">@Localizer["UserName"]</label> <!-- Corrected syntax -->
-            <input type="text" class="form-control" asp-for="UserName" placeholder="@Localizer["Enter UserName"]" />
-            <span asp-validation-for="UserName" class="text-danger"></span> <!-- Corrected syntax -->
+        <label asp-for="UserName">@Localizer["UserName"]</label> <!-- Corrected syntax -->
+        <input type="text" class="form-control" asp-for="UserName" placeholder="@Localizer["Enter UserName"]" />
+        <span asp-validation-for="UserName" class="text-danger"></span> <!-- Corrected syntax -->
         </div>
- *@
+        *@
 
         <div class="row">
             <div class="col-md-12">
@@ -42,7 +41,7 @@
 
                         <div class="mb-3">
                             <label asp-for="companyname" class="form-label">Company Name</label>
-                            <input type="text"  id="companyname" asp-for="companyname" class="form-control" placeholder="Enter Company Name" />
+                            <input type="text" id="companyname" asp-for="companyname" class="form-control" placeholder="Enter Company Name" />
                             <span asp-validation-for="companyname" class="text-danger"></span>
 
 
@@ -78,13 +77,13 @@
 
                         <div class="mb-3">
                             <label asp-for="companyImageUrl" class="form-label">Company Image URL</label>
-                            <input type="text" id="companyImageUrl" asp-for="companyImageUrl" class="form-control" placeholder="Enter image URL"/>
+                            <input type="text" id="companyImageUrl" asp-for="companyImageUrl" class="form-control" placeholder="Enter image URL" />
                             <span asp-validation-for="companyImageUrl" class="text-danger"></span>
 
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-block" >Post</button>
+                            <button type="submit" class="btn btn-primary btn-block">Post</button>
                         </div>
 
                     </div>
