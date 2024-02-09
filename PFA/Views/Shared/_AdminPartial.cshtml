@@ -95,13 +95,21 @@
                     <a href="#pagesmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-copy"></i> Pages</a>
                     <ul class="collapse list-unstyled" id="pagesmenu">
                         <li>
-                            <a href="blank.html"><i class="fas fa-file"></i> Blank page</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Page" asp-action="About">
+                                <i class="fas fa-info-circle"></i> About
+                            </a>
+
                         </li>
                         <li>
-                            <a href="404.html"><i class="fas fa-info-circle"></i> 404 Error page</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Page" asp-action="Contact">
+                                <i class="fas fa-envelope"></i> Contact
+                            </a>
+
                         </li>
                         <li>
-                            <a href="500.html"><i class="fas fa-info-circle"></i> 500 Error page</a>
+                            <a class="collapse-item" asp-area="" asp-controller="Page" asp-action="Privacy">
+                                <i class="fas fa-lock"></i> Privacy Policy
+                            </a>
                         </li>
                     </ul>
                 </li>
