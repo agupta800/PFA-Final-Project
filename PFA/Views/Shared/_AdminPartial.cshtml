@@ -124,7 +124,10 @@
                 <li>
                     <a asp-controller="admin" asp-action="JobList"><i class="fas fa-user-shield"></i><span>Created Job List</span></a>
                 </li>
-             
+                <li>
+                    <a asp-controller="admin" asp-action="JobListV"><i class="fas fa-user-shield"></i><span> Job List</span></a>
+                </li>
+
             </ul>
         </nav>
         <div id="body" class="active">
@@ -243,8 +246,8 @@
     <script src="~/assets/js/script.js"></script>
 
     <script src="~/js/kendo.all.min.js" asp-append-version="true"></script>
-    <script src="~/js/kendo.appbar.min.js"></script>
-    <script src="~/js/kendo.form.min.js"></script>
+@*     <script src="~/js/kendo.appbar.min.js"></script>
+ *@    <script src="~/js/kendo.form.min.js"></script>
     <script src="~/js/kendo-ui-license.js"></script>
     @await Component.InvokeAsync("Notyf")
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3.3.0/dist/notyf.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">

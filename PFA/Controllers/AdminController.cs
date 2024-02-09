@@ -93,6 +93,12 @@ namespace PFA.Controllers
             _context.JobPosts.ToList();
             return View(model);
         }
+        [HttpGet]
+        public IActionResult JobListV(JobPostModel model)
+        {
+            var result = _context.JobPosts.ToList();
+            return View(result);
+        }
         public async Task<IActionResult> AllJobs()
         {
             var allData = await _context.JobPosts.ToListAsync();
@@ -126,11 +132,11 @@ namespace PFA.Controllers
             }
         }
 
-        public IActionResult DeleteJob(int JobId)
+        public IActionResult DeleteJob(int jobID)
         {
             try
             {
-                var jobToDelete = _context.JobPosts.Find(JobId);
+                var jobToDelete = _context.JobPosts.Find(jobID);
                 if (jobToDelete != null)
                 {
                     _context.JobPosts.Remove(jobToDelete);
@@ -150,10 +156,19 @@ namespace PFA.Controllers
                 TempData["ErrorMessage"] = "An error occurred while deleting the job: " + ex.Message;
             }
 
-            return RedirectToAction("Index"); // Redirect to a relevant action, such as the action that renders your view
+            return RedirectToAction("JobListV"); // Redirect to a relevant action, such as the action that renders your view
         }
 
+        public IActionResult DeleteJob1(int id)
+        {
+            var emp = _context.JobPosts.FirstOrDefault(x => x.JobID== id);
+            _context.JobPosts.Remove(emp);
+            _context.SaveChanges();
+                                _notification.Success("Job deleted Sucessfully");
 
+            return RedirectToAction("JobListV");
+
+        }
         [HttpGet]
         public async Task<IActionResult> GetJobCount()
         {
