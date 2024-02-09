@@ -103,11 +103,12 @@ namespace PFA.Controllers
         [HttpGet]
         public IActionResult Updatejob()
         {
+
             return View();
         }
 
 
-
+        [HttpPost]
         public async Task<IActionResult> Updatejob(JobPostModel models)
         {
             try
@@ -125,7 +126,7 @@ namespace PFA.Controllers
             }
         }
 
-        public ActionResult DeleteJob(int JobId)
+        public IActionResult DeleteJob(int JobId)
         {
             try
             {

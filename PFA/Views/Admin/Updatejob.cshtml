@@ -1,36 +1,14 @@
-﻿@model JobPostModel
+﻿@model PFA.JobModel.JobPostModel
+
 
 @{
-    ViewData["Title"] = "JobList";
+     ViewData["Title"] = "Updatejob";
     Layout = "~/Views/Shared/_AdminPartial.cshtml";
 }
 
-<div id="" style="text-align: center;">
-    <h1><u>Create New Job</u></h1>
-
-    @*     <p>Total Job Posts: <span id="totalCount"></span></p>
-    *@
-</div>
-
-
-
-<div asp-validation-summary="All" class="col-4 mx-auto text-danger"></div>
-
 
 <div class="container mt-4">
-    <form asp-action="NewJob" method="POST" id="newJob_form">
-@*         @Html.AntiForgeryToken() *@
-
-        <!-- Your existing form fields -->
-
-      @*   <div asp-validation-summary="ModelOnly" class="text-danger"></div> <!-- Corrected syntax -->
-
-        <div class="mb-3">
-            <label asp-for="UserName">@Localizer["UserName"]</label> <!-- Corrected syntax -->
-            <input type="text" class="form-control" asp-for="UserName" placeholder="@Localizer["Enter UserName"]" />
-            <span asp-validation-for="UserName" class="text-danger"></span> <!-- Corrected syntax -->
-        </div>
- *@
+    <form asp-action="Updatejob" method="POST" >   
 
         <div class="row">
             <div class="col-md-12">
@@ -42,7 +20,7 @@
 
                         <div class="mb-3">
                             <label asp-for="companyname" class="form-label">Company Name</label>
-                            <input type="text"  id="companyname" asp-for="companyname" class="form-control" placeholder="Enter Company Name" />
+                            <input type="text" id="companyname" asp-for="companyname" class="form-control" placeholder="Enter Company Name" />
                             <span asp-validation-for="companyname" class="text-danger"></span>
 
 
@@ -78,13 +56,13 @@
 
                         <div class="mb-3">
                             <label asp-for="companyImageUrl" class="form-label">Company Image URL</label>
-                            <input type="text" id="companyImageUrl" asp-for="companyImageUrl" class="form-control" placeholder="Enter image URL"/>
+                            <input type="text" id="companyImageUrl" asp-for="companyImageUrl" class="form-control" placeholder="Enter image URL" />
                             <span asp-validation-for="companyImageUrl" class="text-danger"></span>
 
                         </div>
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-primary btn-block" >Post</button>
+                            <button type="submit" class="btn btn-primary btn-block">Update</button>
                         </div>
 
                     </div>
@@ -92,17 +70,10 @@
             </div>
         </div>
     </form>
-    @section Scripts {
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                // Remove validation error message when the user corrects the input
-                $("#companyname").on("input", function () {
-                    $("#companynameError").text("");
-                });
-            });
-        </script>
+
         @{
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
         }
     }
+
+   

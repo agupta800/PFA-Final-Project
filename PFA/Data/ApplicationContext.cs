@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using PFA.Blog_Model;
-using PFA.Blog_ModelPFA;
+
 
 namespace PFA.Data
 {

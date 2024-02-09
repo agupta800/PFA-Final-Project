@@ -231,10 +231,9 @@ a.site-logo {
     color: #fff;
     margin-bottom: 20px;
 }
-
 .job-items {
     display: flex;
-    justify-content: flex-start; /* Align items to the left */
+    justify-content: space-between; /* Align items to the left and right */
     align-items: center;
     margin-top: 20px;
     background-color: #fff;
@@ -244,42 +243,36 @@ a.site-logo {
 }
 
 .company-img {
+    flex-shrink: 0; /* Prevent image from shrinking */
     width: 100%;
-    max-width: 100%;
+    max-width: 200px; /* Increase the max-width as needed */
 }
 
     .company-img img {
         width: 100%;
         height: auto;
         border-radius: 8px;
-        margin-right: 20px; /* Add right margin for better spacing */
     }
+
 
 .job-tittle {
     flex-grow: 1;
     margin-left: 20px; /* Adjust left margin for better spacing */
-    margin-right: 20px;
     color: cornflowerblue;
     font-size: 16px;
     font-weight: bold;
-    /* Make the title bold */
 }
 
     .job-tittle h4 {
-        font-size: 16px; /* Reduce font size for the title */
-        color: #333;
-        margin-bottom: 10px;
         font-size: 25px;
         color: aqua;
-        font-weight: bold; /* Make the title bold */
+        font-weight: bold;
+        margin-bottom: 10px;
     }
 
 .items-link {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align items to the left */
-    text-align: left; /* Align text to the left */
-    margin-left: 0; /* Remove left margin for better alignment */
+    flex-shrink: 0; /* Prevent link container from shrinking */
+    margin-left: 20px; /* Add left margin for better spacing */
 }
 
 .apply-link-btn {
@@ -296,7 +289,6 @@ a.site-logo {
 
     .apply-link-btn:hover {
         background-color: #0056b3;
-        color: #fff;
     }
 
 .items-link span {
@@ -306,28 +298,22 @@ a.site-logo {
 
 /* Responsive styles */
 @media screen and (max-width: 768px) {
-    .single-slider {
-        padding: 80px 0;
-    }
-
     .job-items {
         flex-direction: column;
         text-align: center;
+        align-items: flex-start; /* Align items to the left on small screens */
     }
 
-    .company-img img {
-        max-width: 100%; /* Make the image responsive */
-        margin-right: 0; /* Remove right margin for better alignment on small screens */
+    .company-img {
+        max-width: 100%;
         margin-bottom: 15px;
     }
 
     .job-tittle,
     .items-link {
-        margin-left: 0; /* Remove left margin for better alignment on small screens */
-        margin-right: 0; /* Remove right margin for better alignment on small screens */
+        margin-left: 0;
     }
 }
-
 
 site-navbar {
     position: fixed;
