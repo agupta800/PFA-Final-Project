@@ -16,6 +16,12 @@ namespace PFA.Repository.Service
         {
             this.configuration = configuration;
         }
+
+        public Task<bool> EmailSendAsync(string email, string v1, string v2)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> EmailSenderAsync(string email, string Subject, string message)
         {
             bool status = false;

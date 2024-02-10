@@ -136,7 +136,7 @@ namespace PFA.Controllers.Authentication
 
                     if (result.Succeeded)
                     {
-                        TempData["success"] = "Login successful!";
+                        TempData["success"] = "Login successfull!";
                         _notification.Success("Login sucessfully");
 
                         return RedirectToAction("Index", "Home");
@@ -150,7 +150,7 @@ namespace PFA.Controllers.Authentication
                         return View("Lockout");
                     }
 
-                    ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
+                    ModelState.AddModelError(string.Empty, "Incorrect Password");
                 }
             }
             catch (Exception ex)
@@ -263,7 +263,103 @@ namespace PFA.Controllers.Authentication
             return View(vm);
         }
 
-        public IActionResult AccessDenited()
+        public async Task<IActionResult> ForgetPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ForgetPassword(ForgetPasswordUserVM forget)
+        {
+            ModelState.Remove("UserId");
+            ModelState.Remove("Password");
+            ModelState.Remove("ConfirmPassword");
+            ModelState.Remove("Token");
+            if (!ModelState.IsValid)
+            {
+                return View(forget);
+            }
+
+            var user = await userManager.FindByEmailAsync(forget.Email);
+            if (user != null)
+            {
+                var code = await userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword1", "Account", new { userId = user.Id, Token = code }, protocol: Request.Scheme);
+
+                bool isSendEmail = await emailSender.EmailSenderAsync(
+            forget.Email,
+             "ResetPassword",
+            "Please reset your password by clicking " +
+            "<a style='display:inline-block; padding:12px 24px; font-size:16px; font-weight:bold; text-align:center; text-decoration:none; background-color:#04aa6d; color:#ffffff; border-radius:5px;' href=\"" + callbackUrl + "\">Reset Password</a>"
+                );
+
+                if (isSendEmail)
+                {
+                    Response response = new Response();
+                    response.Message = "Reset Link Send";
+                    return RedirectToAction("ForgetPasswordConfirmation", response);
+                }
+            }
+            return View();
+        }
+
+        public IActionResult ForgetPasswordConfirmation (Response response)
+        {
+
+            return View(response);
+        }
+
+
+        public IActionResult ResetPassword1(string userId,string Token)
+        {
+            var model = new ForgetPasswordUserVM
+            {
+                Token = Token,
+                UserId = userId,
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword1(ForgetPasswordUserVM forget)
+        {
+            ModelState.Remove("Email");
+         
+
+
+
+            if (!ModelState.IsValid)
+            {
+                return View(forget);
+            }
+
+            var user = await userManager.FindByIdAsync(forget.UserId);
+
+            if (user == null)
+            {
+                return View(forget);
+            }
+
+            var result = await userManager.ResetPasswordAsync(user, forget.Token, forget.Password);
+
+            if (result.Succeeded)
+            {
+                // Consider using TempData to pass messages to the next request
+                _notification.Success("Reset sucessfully");
+
+                //TempData["success"] = "Your password has been reset successfully.";
+                return RedirectToAction("ForgetResetConfirmed");
+            }
+
+            // If the password reset fails, add model errors to display appropriate messages
+            foreach (var error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
+
+            return View(forget);
+        }
+
+        public IActionResult ForgetResetConfirmed()
         {
             return View();
         }
