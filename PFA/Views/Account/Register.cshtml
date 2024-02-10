@@ -27,15 +27,25 @@
         <span asp-validation-for="Email" class="text-danger"></span> <!-- Corrected syntax -->
     </div>
 
-    <div class="mb-3">
-        <label asp-for="Password">@Localizer["Password"]</label> <!-- Corrected syntax -->
-        <input type="password" class="form-control" asp-for="Password" placeholder="@Localizer["Enter password"]" /> <!-- Corrected type -->
+    <div class="mb-3 position-relative">
+        <label asp-for="Password" class="form-label">@Localizer["Password"]</label>
+        <div class="input-group">
+            <input type="password" id="password" class="form-control" asp-for="Password" placeholder="Enter password" />
+            <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('password', 'eyeIconPassword')">
+                <i id="eyeIconPassword" class="bi bi-eye"></i>
+            </button>
+        </div>
         <span asp-validation-for="Password" class="text-danger"></span>
     </div>
 
-    <div class="mb-3">
-        <label asp-for="ConfirmPassword">@Localizer["ConfirmPassword"]</label> <!-- Corrected syntax -->
-        <input type="password" class="form-control" asp-for="ConfirmPassword" placeholder="@Localizer["Enter confirm password"]"> <!-- Corrected type and placeholder -->
+    <div class="mb-3 position-relative">
+        <label asp-for="ConfirmPassword" class="form-label">@Localizer["ConfirmPassword"]</label>
+        <div class="input-group">
+            <input type="password" id="confirmPassword" class="form-control" asp-for="ConfirmPassword" placeholder="Enter confirm password" />
+            <button type="button" class="btn btn-outline-secondary" onclick="togglePasswordVisibility('confirmPassword', 'eyeIconConfirmPassword')">
+                <i id="eyeIconConfirmPassword" class="bi bi-eye"></i>
+            </button>
+        </div>
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
 
