@@ -7,7 +7,7 @@
 
 }
 
-<form method="post">
+<form method="post" asp-controller="Account" asp-action="Register" class="mt-4">
 
     <h3 class="text-muted ab-1" style="font-size:20px;">@Localizer["Create An Account"]</h3>
 
@@ -48,8 +48,7 @@
         </div>
         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
     </div>
-
-    <div class="float-end">
+    <div class="d-grid">
         <button type="submit" class="btn btn-primary rounded-pill py-3 px-4 d-none d-lg-block" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
             @Localizer["Register"]
         </button>

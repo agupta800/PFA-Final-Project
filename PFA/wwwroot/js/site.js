@@ -105,9 +105,18 @@ $('#CustomImg img').on('mouseenter', function () {
     $('#ImgBody').html(html);
 });
 
-$('#CustomImg img').on('mouseleave', function () {
-    $('#ImgModel').hide();
-});
+//$('#CustomImg img').on('mouseleave', function () {
+//    $('#ImgModel').hide();
+//});
+// Check if the event is already bound before binding again
+//if (!$('#CustomImg img').data('mouseleave-bound')) {
+//    $('#CustomImg img').on('mouseleave', function () {
+//        $('#ImgModel').hide();
+//    });
+
+//    // Mark the event as bound
+//    $('#CustomImg img').data('mouseleave-bound', true);
+//}
 
 $('#CloseBtn').on('click', function () {
     $('#ImgModel').hide();

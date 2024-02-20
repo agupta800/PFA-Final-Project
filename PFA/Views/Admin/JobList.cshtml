@@ -12,6 +12,7 @@
 
 <div id="grid" class="col-10 offset-1 "></div>
 
+
 <!-- Include necessary scripts -->
 <script>
     $(document).ready(function () {
@@ -20,7 +21,10 @@
                 transport: {
                     read: {
                         url: "/Admin/AllJobs",
-                        dataType: "json"
+                        dataType: "json",
+                        success: function (data) {
+                            console.log("AllJobs data:", data);
+                        }
                     },
                     destroy: {
                         url: "/Admin/DeleteJob",
@@ -100,6 +104,7 @@
                     success: function (result) {
                         // Handle the success response
                         console.log("Data updated successfully");
+                       
                         // var successMessage = "Data Updated Successfully";
 
                         // // You can use successMessage as needed (e.g., display it in a popup)

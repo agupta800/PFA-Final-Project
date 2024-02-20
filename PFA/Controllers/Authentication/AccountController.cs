@@ -137,7 +137,7 @@ namespace PFA.Controllers.Authentication
                     if (result.Succeeded)
                     {
                         TempData["success"] = "Login successfull!";
-                        _notification.Success("Login sucessfully");
+                        //_notification.Success("Login sucessfully");
 
                         return RedirectToAction("Index", "Home");
 
@@ -166,7 +166,7 @@ namespace PFA.Controllers.Authentication
         public async Task<IActionResult> Logout()
         {
             await signInmanager.SignOutAsync();
-            _notification.Success("Logout sucessfully");
+            //_notification.Success("Logout sucessfully");
 
             TempData["success"] = "You have been successfully logged out.";
 
@@ -303,14 +303,14 @@ namespace PFA.Controllers.Authentication
             return View();
         }
 
-        public IActionResult ForgetPasswordConfirmation (Response response)
+        public IActionResult ForgetPasswordConfirmation(Response response)
         {
 
             return View(response);
         }
 
 
-        public IActionResult ResetPassword1(string userId,string Token)
+        public IActionResult ResetPassword1(string userId, string Token)
         {
             var model = new ForgetPasswordUserVM
             {
@@ -323,9 +323,6 @@ namespace PFA.Controllers.Authentication
         public async Task<IActionResult> ResetPassword1(ForgetPasswordUserVM forget)
         {
             ModelState.Remove("Email");
-         
-
-
 
             if (!ModelState.IsValid)
             {

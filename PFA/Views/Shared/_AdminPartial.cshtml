@@ -81,13 +81,13 @@
                     <a href="#authmenu" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle no-caret-down"><i class="fas fa-user-shield"></i> Authentication</a>
                     <ul class="collapse list-unstyled" id="authmenu">
                         <li>
-                            <a href="login.html"><i class="fas fa-lock"></i> Login</a>
+                            <a asp-action="Login" asp-controller="Account"><i class="fas fa-lock"></i> Login</a>
                         </li>
                         <li>
-                            <a href="signup.html"><i class="fas fa-user-plus"></i> Signup</a>
+                            <a asp-action="Register" asp-controller="Account"><i class="fas fa-user-plus"></i> Signup</a>
                         </li>
                         <li>
-                            <a href="forgot-password.html"><i class="fas fa-user-lock"></i> Forgot password</a>
+                            <a asp-action="ForgetPassword" asp-controller="Account"><i class="fas fa-user-lock"></i> Forgot password</a>
                         </li>
                     </ul>
                 </li>
@@ -165,11 +165,15 @@
                                     <ul class="nav-list">
                                         <li><a href="" class="dropdown-item"><i class="fas fa-address-card"></i> Profile</a></li>
                                         <li><a href="" class="dropdown-item"><i class="fas fa-envelope"></i> Messages</a></li>
-                                        <li><a href="" class="dropdown-item"><i class="fas fa-cog"></i> Settings</a></li>
+                                        <li class="nav-item">
+                                            <a asp-action="Logout" asp-controller="Account" class="nav-link text-danger" title="Logout">
+                                                <button type="submit" class="btn btn-primary">Log Out</button>
+
+                                            </a>
+                                        </li>
+
                                         <div class="dropdown-divider"></div>
-                                        <a asp-controller="Home" asp-action="Index" class="dropdown-item">
-                                            <i class="fas fa-sign-out-alt"></i> Logout
-                                        </a>
+                                     
                                     </ul>
                                 </div>
                             </div>
@@ -180,7 +184,7 @@
 
             @RenderBody()
 
-
+           
 
 
         </div>
@@ -201,7 +205,7 @@
     <script src="https://cdn.jsdelivr.net/npm/notyf@3.3.0/dist/notyf.min.js" integrity="sha384-fST/R63JCcAVLUqQUl5ZUqMsIZqA+vl43A7Qy7/qXE6LlXVVuC3w4Xl+8oXu94eE" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.tiny.cloud/1/7qjkjvz7eegr5schf3b8iwvemcxjb82zvn5nvbm02u8l4xkb/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         $(document).ready(function () {
             $('#myTable').DataTable();
