@@ -80,6 +80,7 @@
                             .appendTo(container)
                             .kendoDatePicker({
                                 format: "yyyy-MM-dd H:mm",
+                                max: new Date(),  // Set minimum date to today
                                 change: function () {
                                     var value = this.value();
                                     var formattedDate = kendo.toString(value, "yyyy-MM-dd H:mm");

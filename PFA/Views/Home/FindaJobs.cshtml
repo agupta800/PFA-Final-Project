@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "FindaJobs";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    
 }
 
 
@@ -49,7 +50,7 @@
                             </a>
                             <ul>
                                 <li>Job Title: @item.jobTitle</li>
-                                <li>Description: @item.txtDescription</li>
+                                <li>Description:@Html.Raw(@item.txtDescription)</li>
                                 <li>Date: @item.inputDate</li>
                             </ul>
                         </div>

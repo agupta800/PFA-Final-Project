@@ -2,34 +2,46 @@
 @inject IViewLocalizer Localizer
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-
 }
-<div class="limiter">
-    <div class="container-login100">
-        <div class="card login-logout-card">
-            <div class="card-header">
-                <ul class="nav nav-tabs card-header-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Login" ? "active" : "")" asp-action="Login" asp-controller="Account">@Localizer["Login"]</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link @(ViewContext.RouteData.Values["Action"].ToString() == "Register" ? "active" : "")" asp-action="Register" asp-controller="Account">@Localizer["Register"]</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-body">
-                <div class="row justify-content-center">
-                    <div class="col-md-10">
-                        @RenderBody()
+<style>
+    /*   body {
+            background-image:
+    /*         url("https://static.vecteezy.com/system/resources/previews/002/463/630/large_2x/jungle-wild-nature-green-color-scene-vector.jpg");
+     */ url(https://images.unsplash.com/photo-1528353518104-dbd48bee7bc4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2089&q=80);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    }
+    */
+</style>
+<div class="container mt-5 container-login100">
+    <div class="row justify-content-center container-login100">
+        <div class="col-md-6">
+            <div class="card login-logout-card">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link active" asp-action="Login" asp-controller="Account">@Localizer["Login"]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Register" asp-controller="Account">@Localizer["Register"]</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            @RenderBody()
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-@section scripts{
-    @await RenderSectionAsync("Scripts", required:false)
+@section scripts {
+    @await RenderSectionAsync("Scripts", required: false)
 
 }
-
