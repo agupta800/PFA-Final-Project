@@ -2198,7 +2198,7 @@ progress {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
-  border-radius: 0;
+  border-radius: 20px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2780,7 +2780,12 @@ textarea.form-control-lg {
 }
 
 .input-group > :not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) {
-  margin-left: -1px;
+    float: right; /* Float it to the right */
+    margin-left: -5px;
+/*    border-radius: 20px;
+*/    padding: revert;
+   background-color: #ced4da;
+*/    border: 1px solid #ced4da;
 }
 
 .valid-feedback {
@@ -3919,12 +3924,17 @@ textarea.form-control-lg {
   background-color: transparent;
   border-color: transparent;
 }
-.nav-tabs .nav-link.active,
-.nav-tabs .nav-item.show .nav-link {
-  color: #495057;
-  background-color: #fff;
-  border-color: #dee2e6 #dee2e6 #fff;
-}
+    .nav-tabs .nav-link.active {
+        color: #495057;
+        background-color: #fff;
+        border-color: #dee2e6 #dee2e6 #fff;
+    }
+
+        .nav-tabs .nav-link.active.active-tab {
+            border-bottom: 2px solid blue; /* Set the bottom border color to blue for the active tab */
+        }
+
+
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
 }
