@@ -55,6 +55,8 @@
                         </a>
                         <p class="post-meta">
                             Posted on @post.CreatedDate.ToShortDateString()
+                            <a asp-controller="Blog" asp-action="Post" asp-route-slug="@post.Slug" class="btn btn-primary float-end">Read More</a>
+
                         </p>
 
                     </div>
