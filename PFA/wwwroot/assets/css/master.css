@@ -183,6 +183,7 @@ body {
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
     padding: 10px;
+    padding-left:50px;
 }
 
 .box-footer {

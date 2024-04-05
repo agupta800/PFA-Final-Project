@@ -1,0 +1,90 @@
+﻿@model FileModel
+
+<style>
+    #invoice {
+        max-width: 600px;
+        margin: 85px auto; /* Added margin to create space from the top */
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    p {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn {
+        display: block;
+        width: 200px;
+        margin: -90px auto 1px; /* Adjusted margin-top to move the button up */
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        text-align: center;
+        font-size: 18px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+</style>
+
+<div class="card" id="invoice">
+    <h2>File Details</h2>
+    <p>Tracking ID: @Model.TrackingId</p>
+    <p>Full Name:@Model.FullName</p>
+    <p>Email: @Model.Email</p>
+    <p>Address: @Model.Address</p>
+    <p>DateofBirth: @Model.DateOfBirth</p>
+    <p>Phone Number: @Model.Phone</p>
+    <p>City: @Model.City</p>
+    <p>Qualification: @Model.Qualification</p>
+    <p>JobCategory: @Model.JobCategory</p>
+    <p>Position: @Model.Position</p>
+    <p>KeySkills: @Model.KeySkills</p>
+    <p>HasExperience: @Model.HasExperience</p>
+</div>
+
+<button class="btn" id="download">Download PDF</button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+<script>
+    window.onload = function () {
+        document.getElementById("download").addEventListener("click", () => {
+            const invoice = document.getElementById("invoice");
+            var opt = {
+                margin: 1,
+                filename: 'myfile.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            html2pdf().from(invoice).set(opt).save();
+        })
+    }
+</script>

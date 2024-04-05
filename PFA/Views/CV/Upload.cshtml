@@ -1,0 +1,405 @@
+﻿@model FileModel
+@{
+        Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@* <div class="uploadcv">
+    <div class="uploadcv_bg background-image">
+        <img src="/img/cv_assets/resume-bg2.png" alt="" />
+    </div> *@
+<style>
+    .form-group label.control-label {
+        font-weight: bold; /* Set label text to bold */
+    }
+</style>
+
+<style>
+    .uploadcv_first_uploadl_cv {
+        /* Add background image URL and other properties */
+        background-image: url('/img/cv_assets/resume-bg2.png');
+        background-size: cover; /* Adjust background size as needed */
+        background-position: center top 50px; /* Adjust vertical position */
+        /* Add more CSS properties for positioning, size, etc. */
+    }
+</style>
+
+
+<form asp-controller="CV" asp-action="Upload" method="post" enctype="multipart/form-data">
+
+    <div class="uploadcv_first_uploadl_cv">
+        <div class="col-sm-12 text-center">
+            <h3 class="no-mrg-t text-dark">
+                Apply for Jobs Effortlessly </h3>
+                <p class="pdd-xs-b">
+                    CarrerSync places a high value and importance on confidentiality.
+                    We ensure that any personal information or CV that is shared shall be firstly
+                    taken consent from the candidate.
+                </p>
+        </div>
+        <div style="width: 50%; float: left;">
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+        </div>
+        <div style="width: 50%; float: left;">
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="width: 50%; float: left;">
+            <div class="form-group" style="width: 80%;">
+                <label asp-for="Email" class="control-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+        <div style="width: 50%; float: left;">
+            <div class="form-group" style="width: 80%;">
+                <label asp-for="DateOfBirth" class="control-label">Date Of Birth</label>
+            <input asp-for="DateOfBirth" class="form-control" />
+            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+        </div>
+    </div>
+        <div style="width: 50%; float: left;">
+            <div class="form-group">
+            <label asp-for="Mobile" class="control-label"> Mobile Number</label>
+            <input asp-for="Mobile" class="form-control" />
+            <span asp-validation-for="Mobile" class="text-danger"></span>
+        </div>
+    </div>
+        <div style="width: 50%; float: left;">
+            <div class="form-group">
+            <label asp-for="Address" class="control-label"> Address</label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+    </div>
+        <div style="width: 50%; float: left;">
+            <div class="form-group">
+            <label asp-for="Phone" class="control-label"></label>
+            <input asp-for="Phone" class="form-control" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+    </div>
+    @*      <div class="col-sm-6">
+
+    <div class="form-group">
+    <input type="file" name="file" />
+    <input type="submit" value="Upload" />
+    </div>
+    </div> *@
+
+        <div style="width: 50%; float: left;">
+            <div class="form-group" style="width: 80%;">
+                <label asp-for="Image" class="control-label">Image (PDF only)</label>
+            <input asp-for="Image" type="file" accept=".pdf" class="form-control" />
+            <span asp-validation-for="Image" class="text-danger"></span>
+            <div id="imagePath"></div>
+        </div>
+    </div>
+
+
+        <div style="width: 50%; float: right;">
+            <div class="form-group">
+            <label>Do you have experience?</label>
+            <div class="text-left mrg-b-20">
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(model => model.HasExperience, true, new { @class = "radio-btn_uploadl" })
+                    Yes
+                </label>
+                <label class="radio-inline">
+                    @Html.RadioButtonFor(model => model.HasExperience, false, new { @class = "radio-btn_uploadl" })
+                    No
+                </label>
+            </div>
+        </div>
+    </div>
+        <div style="width: 50%; float: right;">
+            <div class="form-group">
+            <label asp-for="Position" class="control-label">Current Postion</label>
+            <input asp-for="Position" class="form-control" />
+            <span asp-validation-for="Position" class="text-danger"></span>
+        </div>
+
+    </div>
+
+        <div style="width: 50%; float: left;">
+            <div class="form-group">
+            <label asp-for="City" class="control-label">Address</label>
+            <select asp-for="City" class="form-control">
+
+                <span asp-validation-for="City" class="text-danger"></span>
+                <option value="">Select District</option>
+                <option value="Achham">Achham</option>
+                <option value="Bajura">Bajura</option>
+                <option value="Banke">Banke</option>
+                <option value="Bardiya">Bardiya</option>
+                <option value="Dang Deokhuri">Dang Deokhuri</option>
+                <option value="Darchula">Darchula</option>
+                <option value="Dhading">Dhading</option>
+                <option value="Dhankuta">Dhankuta</option>
+                <option value="Dhanusa">Dhanusa</option>
+                <option value="Dolkha">Dolkha</option>
+                <option value="Dolpa">Dolpa</option>
+                <option value="Doti">Doti</option>
+                <option value="Gorkha">Gorkha</option>
+                <option value="Gulmi">Gulmi</option>
+                <option value="Humla">Humla</option>
+                <option value="Jajarkot Corridor">Jajarkot Corridor</option>
+                <option value="Jhapa">Jhapa</option>
+                <option value="Kalikot">Kalikot</option>
+                <option value="Kathmandu">Kathmandu</option>
+                <option value="Kavrepalanchok">Kavrepalanchok</option>
+                <option value="Khotang">Khotang</option>
+                <option value="Lalitpur">Lalitpur</option>
+                <option value="Lamjung">Lamjung</option>
+                <option value="Makwanpur">Makwanpur</option>
+                <option value="Manang">Manang</option>
+                <option value="Morang">Morang</option>
+                <option value="Parbat">Parbat</option>
+                <option value="Parsa">Parsa</option>
+                <option value="Pyuthan">Pyuthan</option>
+                <option value="Rupandehi">Rupandehi</option>
+                <option value="Sindhupalchok">Sindhupalchok</option>
+                <option value="Siraha">Siraha</option>
+                <option value="Sunsari">Sunsari</option>
+                <option value="Surkhet Corridor">Surkhet Corridor</option>
+                <option value="Tanahu">Tanahu</option>
+                <option value="Terhathum">Terhathum</option>
+                <option value="Taplejung">Taplejung</option>
+                <option value="Panchthar">Panchthar</option>
+                <option value="Ilam">Ilam</option>
+                <option value="Bhojpur">Bhojpur</option>
+                <option value="Sankhuwasabha">Sankhuwasabha</option>
+                <option value="Solukhumbu">Solukhumbu</option>
+                <option value="Udaypur">Udaypur</option>
+                <option value="Saptari">Saptari</option>
+                <option value="Mahottari">Mahottari</option>
+                <option value="Sarlahi">Sarlahi</option>
+                <option value="Sindhuli">Sindhuli</option>
+                <option value="Ramechhap">Ramechhap</option>
+                <option value="Sindhupalchowk">Sindhupalchowk</option>
+                <option value="Nuwakot">Nuwakot</option>
+                <option value="Rasuwa">Rasuwa</option>
+                <option value="Rautahat">Rautahat</option>
+                <option value="Bara">Bara</option>
+                <option value="Parsa">Parsa</option>
+                <option value="Chitwan">Chitwan</option>
+                <option value="Syangja">Syangja</option>
+                <option value="Kaski">Kaski</option>
+                <option value="Mustang">Mustang</option>
+                <option value="Parwat">Parwat</option>
+                <option value="Myagdi">Myagdi</option>
+                <option value="Baglung">Baglung</option>
+                <option value="Palpa">Palpa</option>
+                <option value="Nawalparasi">Nawalparasi</option>
+                <option value="Arghakhanchi">Arghakhanchi</option>
+                <option value="Kapilvastu">Kapilvastu</option>
+                <option value="Rolpa">Rolpa</option>
+                <option value="Rukum">Rukum</option>
+                <option value="Salyan Corridor">Salyan Corridor</option>
+                <option value="Dang">Dang</option>
+                <option value="Dailekh">Dailekh</option>
+                <option value="Mugu">Mugu</option>
+                <option value="Jumla Corridor">Jumla Corridor</option>
+                <option value="Bajhang">Bajhang</option>
+                <option value="Kailali">Kailali</option>
+                <option value="Kanchanpur">Kanchanpur</option>
+                <option value="Dadeldhura">Dadeldhura</option>
+                <option value="Baitadi">Baitadi</option>
+                <option value="Butwal">Butwal</option>
+                <option value="Bhairahawa">Bhairahawa</option>
+                <option value="Chitwan">Chitwan</option>
+                <option value="Kotihawa">Kotihawa</option>
+                <option value="Pokhara">Pokhara</option>
+                <option value="Birgunj">Birgunj</option>
+                <option value="Biratnagar">Biratnagar</option>
+                <option value="Illam">Illam</option>
+                <option value="Janakpur">Janakpur</option>
+                <option value="Mahendranagar">Mahendranagar</option>
+                <option value="Nepalgunj">Nepalgunj</option>
+                <option value="Rajbiraj">Rajbiraj</option>
+                <option value="Dhangadi">Dhangadi</option>
+                <option value="Hetauda">Hetauda</option>
+                <option value="Narayangarh">Narayangarh</option>
+                <option value="Bharatpur">Bharatpur</option>
+                <option value="Amaragadhi">Amaragadhi</option>
+                <option value="Balkhu">Balkhu</option>
+                <option value="Banepa">Banepa</option>
+                <option value="Khadbari">Khadbari</option>
+                <option value="Hile">Hile</option>
+                <option value="Gaighat">Gaighat</option>
+                <option value="Mechi">Mechi</option>
+                <option value="Damak">Damak</option>
+                <option value="Bardibas">Bardibas</option>
+                <option value="Aanbu khaireni">Aanbu khaireni</option>
+                <option value="Jeetpur">Jeetpur</option>
+                <option value="Charikot">Charikot</option>
+                <option value="Mitrapark Kathmandu">Mitrapark Kathmandu</option>
+                <option value="Chabahil">Chabahil</option>
+                <option value="All Over Nepal">All Over Nepal</option>
+                <option value="Kohalpur">Kohalpur</option>
+                <option value="Chapur">Chapur</option>
+                <option value="Lalbandi">Lalbandi</option>
+                <option value="Barahathawa">Barahathawa</option>
+                <option value="Province 5">Province 5</option>
+                <option value="Gajuri">Gajuri</option>
+                <option value="Damauli">Damauli</option>
+                <option value="Dhulabari">Dhulabari</option>
+                <option value="Urlabari">Urlabari</option>
+                <option value="Central Region">Central Region</option>
+                <option value="Bhaktapur">Bhaktapur</option>
+                <option value="Dharke">Dharke</option>
+                <option value="Narayani Zone">Narayani Zone</option>
+                <option value="Beltar">Beltar</option>
+                <option value="Province 2">Province 2</option>
+                <option value="Mirchaiya">Mirchaiya</option>
+                <option value="Kalaiya">Kalaiya</option>
+                <option value="Jitpur">Jitpur</option>
+                <option value="Surkhet">Surkhet</option>
+                <option value="Dumre">Dumre</option>
+                <option value="Province 1">Province 1</option>
+                <option value="Amleakhgunj">Amleakhgunj</option>
+                <option value="lamki">lamki</option>
+                <option value="Lamki">Lamki</option>
+                <option value="Lamahi">Lamahi</option>
+                <option value="Chanauta">Chanauta</option>
+                <option value="Chandranigahapur, Nepal">Chandranigahapur, Nepal</option>
+                <option value="Lumbini">Lumbini</option>
+                <option value="Sagarmatha">Sagarmatha</option>
+                <option value="Bheri">Bheri</option>
+                <option value="Seti">Seti</option>
+                <option value="Mahakali">Mahakali</option>
+                <option value="Gorakhpur Locknow">Gorakhpur Locknow</option>
+                <option value="Bhutan">Bhutan</option>
+                <option value="Silguri">Silguri</option>
+                <option value="Lucknow">Lucknow</option>
+                <option value="Gorakhpur">Gorakhpur</option>
+                <option value="Naubise">Naubise</option>
+                <option value="Rapti">Rapti</option>
+                <option value="Gandaki">Gandaki</option>
+                <option value="Narayani">Narayani</option>
+                <option value="Ghorahi">Ghorahi</option>
+                <option value="Duhabi">Duhabi</option>
+                <option value="Tandi">Tandi</option>
+                <option value="Japan">Japan</option>
+                <option value="Kawasoti">Kawasoti</option>
+            </select>
+        </div>
+    </div>
+        <div style="width: 50%; float: left;">
+            <div class="form-group">
+            <label asp-for="Qualification" class="control-label">Qualification</label>
+            <select asp-for="Qualification" class="form-control">
+                <span asp-validation-for="Qualification" class="text-danger"></span>
+                <option value="">Select Education Level</option>
+                <option value="M. Phil">M. Phil</option>
+                <option value="PHD">PHD</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="SLC/ SEE / School Level">SLC/ SEE / School Level</option>
+                <option value="Bachelors Degree">Bachelors Degree</option>
+                <option value="Masters Degree">Masters Degree</option>
+                <option value="BSCcSIT">BSCcSIT</option>
+            </select>
+        </div>
+    </div>
+
+        <div style="width: 50%; float: left;">
+            <div class="form-group">
+            <label asp-for="JobCategory" class="control-label">Job Category</label>
+            <select asp-for="JobCategory" class="form-control">
+                <span asp-validation-for="JobCategory" class="text-danger"></span>
+                <option value="">Select a job category</option>
+                <option value="Academic/Abroad Study">Academic/Abroad Study</option>
+                <option value="Accounting/Finance/Audit">Accounting/Finance/Audit</option>
+                <option value="Actuary (Insurance)">Actuary (Insurance)</option>
+                <option value="Account management">Account management</option>
+                <option value="Counsellor">Counsellor</option>
+                <option value="Admission officer">Admission officer</option>
+                <option value="Banking & Financial Institutions">Banking & Financial Institutions</option>
+                <option value="Media/Publication/Event Management">Media/Publication/Event Management</option>
+                <option value="Counseling/Education/Training">Counseling/Education/Training</option>
+                <option value="Development Org/NGOs/INGOs">Development Org/NGOs/INGOs</option>
+                <option value="Hardware Companies">Hardware Companies</option>
+                <option value="Telecommunication/ISP">Telecommunication/ISP</option>
+                <option value="Manufacturing/Processing">Manufacturing/Processing</option>
+                <option value="HR/Legal/Management/Consulting">HR/Legal/Management/Consulting</option>
+                <option value="Trading/Distribution/EXIM">Trading/Distribution/EXIM</option>
+                <option value="Agriculture/Livestock">Agriculture/Livestock</option>
+                <option value="Hospitality/Travel/Tours">Hospitality/Travel/Tours</option>
+                <option value="Call Centers/BPO/Services">Call Centers/BPO/Services</option>
+                <option value="Hydro/Solar/alternative Energy">Hydro/Solar/alternative Energy</option>
+                <option value="Architect/Interior/Fashion">Architect/Interior/Fashion</option>
+                <option value="Civil/Building Construction">Civil/Building Construction</option>
+                <option value="Airlines/Aviation/Travels">Airlines/Aviation/Travels</option>
+                <option value="Marketing/Advertising/Customer Service">Marketing/Advertising/Customer Service</option>
+                <option value="General Administration/Management">General Administration/Management</option>
+                <option value="Automobile/Service/Spare Parts">Automobile/Service/Spare Parts</option>
+                <option value="Beauty/Fashion/Apparels/Accessories">Beauty/Fashion/Apparels/Accessories</option>
+                <option value="Commercial/logistics/Materials">Commercial/logistics/Materials</option>
+                <option value="Food & Beverages/Liquor/FMCG">Food & Beverages/Liquor/FMCG</option>
+                <option value="Health/Pharma/Biotech/Medical">Health/Pharma/Biotech/Medical</option>
+                <option value="Internship/Research & Development">Internship/Research & Development</option>
+                <option value="IT/Software/Data based Management">IT/Software/Data based Management</option>
+                <option value="Journalism/Media/News & Publishing">Journalism/Media/News & Publishing</option>
+                <option value="NGO/INGO/Social work">NGO/INGO/Social work</option>
+                <option value="Repair/Maintenance">Repair/Maintenance</option>
+                <option value="Technology/Designing/Programming">Technology/Designing/Programming</option>
+                <option value="Sales/Marketing/Brand Promotion">Sales/Marketing/Brand Promotion</option>
+                <option value="Tourism/Hospitality/Guest Relation">Tourism/Hospitality/Guest Relation</option>
+                <option value="Brand Promotion/Merchandising">Brand Promotion/Merchandising</option>
+                <option value="Education/Training/Development">Education/Training/Development</option>
+                <option value="Electronics Division/Home Appliances">Electronics Division/Home Appliances</option>
+                <option value="Engineering">Engineering</option>
+            </select>
+        </div>
+    </div>
+
+        <div style="width: 50%; float: right;">
+            <div class="form-group">
+                <label asp-for="Position" class="control-label"></label>
+                <input asp-for="Position" class="form-control" placeholder="e.g., Software Engineer, Data Analyst, Project Manager" />
+                <span asp-validation-for="Position" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div style="width: 50%; float: left;">
+            <div class="form-group" style="display: flex; align-items: baseline;">
+                <label asp-for="KeySkills" class="control-label" style="margin-right: 10px;"></label>
+                <input asp-for="KeySkills" class="form-control" style="text-align: left; flex: 1;" placeholder="e.g., Java, Python, Data Analysis" />
+                <span asp-validation-for="KeySkills" class="text-danger"></span>
+            </div>
+        </div>
+
+
+
+            @*    <button type="submit" class="btn btn-primary form_submit_popup_uploadl_cv"
+            id="form_submit_popup_uploadl_cv">
+            Submit your CV
+            </button> *@
+
+        <button type="submit" class="btn rounded-pill py-3 px-3" style="background-color: #ff6a00; color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-left: 100px; border-radius: 10px;">
+            Submit your CV
+        </button>
+
+
+        
+       
+
+    </div>
+
+</form>
+
+
+<script>
+    function updateFileName(input) {
+        var fileName = input.files[0].name;
+        document.getElementById('FileName').value = fileName;
+    }
+
+</script>

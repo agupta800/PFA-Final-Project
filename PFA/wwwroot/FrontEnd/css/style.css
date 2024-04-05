@@ -372,9 +372,10 @@
     padding: 20px;
   }
 
-  .form-group {
-    margin-bottom: 20px;
-  }
+.form-group {
+    margin-bottom: 12px;
+    margin-left: 30px;
+}
 
  .login-container label {
     display: block;

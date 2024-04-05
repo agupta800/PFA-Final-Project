@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PFA.Models;
 
 namespace PFA.JobModel
 {
@@ -12,9 +13,10 @@ namespace PFA.JobModel
         
         }
         public DbSet<JobPostModel> JobPosts { get; set; }
-        //public DbSet<Post>? Posts { get; set; }
-        //public DbSet<Page>? Pages { get; set; }
-        //public DbSet<Setting>? Settings { get; set; }
+
+        public DbSet<FileModel> Files { get; set; }
+
+
 
     }
 }

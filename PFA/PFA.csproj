@@ -29,6 +29,7 @@
     <Folder Include="wwwroot\DBAssests\plugins\fullcalendar\css\" />
     <Folder Include="wwwroot\DBAssests\plugins\input-tags\css\" />
     <Folder Include="wwwroot\DBAssests\plugins\notifications\css\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

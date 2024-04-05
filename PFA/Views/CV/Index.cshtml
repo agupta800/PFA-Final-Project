@@ -1,0 +1,116 @@
+﻿@model IEnumerable<FileModel>
+
+@{
+    ViewBag.Title = "All CV";
+    Layout = "~/Views/Shared/_AdminPartial.cshtml";
+}
+
+
+
+<div class="box box-primary">
+    <div class="box-body">
+        <p style="text-align: center; font-weight: bold; font-size: 20px; color: #333; text-transform: uppercase; letter-spacing: 2px;">File List</p>
+
+    
+
+        <table class="table table-striped table-hover" id="myTable" style="overflow-y: auto; display: block; white-space: nowrap; background-color: lightgrey;">
+    <thead>
+        <tr>
+           <th style="text-align: center;">Actions</th>
+           <th style="text-align: center;">Status</th>
+           <th style="text-align: center;">Status Update</th>
+
+            <th>Tracking ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>DOB</th>
+            <th>Phone No</th>
+            <th>City</th>
+            <th>Qualification</th>
+            <th>Job Category</th>
+            <th>Position</th>
+            <th>Key Skills</th>
+            <th>Experience</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var userViewModel in Model)
+        {
+            <tr>
+                <td style="text-align: center;">
+
+                            <a href="@Url.Action("Delete", "CV", new { id = userViewModel.Id})" class="btn btn-outline-danger btn-rounded" onclick="return confirm('Are you sure you want to delete?');"><i class="fas fa-trash"></i></a>
+                            <a class="btn btn-outline-warning btn-rounded" asp-action="View" asp-route-id="@userViewModel.Id"><i class="fas fa-eye"></i></a>
+
+                    <a class="btn btn-outline-primary btn-rounded" asp-controller="CV" asp-action="Download" asp-route-id="@userViewModel.Id"><i class="fas fa-download"></i> </a>
+                </td>
+                <td>
+                    @if (userViewModel.IsApproved)
+                    {
+                        <span class="badge" style="background-color: green; color: white;">Approved</span>
+                    }
+                    else if (userViewModel.IsDisApproved)
+                    {
+                        <span class="badge" style="background-color: red; color: white;">Disapproved</span>
+                    }
+                    else
+                    {
+                        <span class="badge" style="background-color: yellow; color: black;">Pending Approval</span>
+                    }
+                </td>
+
+                <td>
+                    <div style="display: flex; justify-content: space-between;">
+                        <form asp-controller="CV" asp-action="Approve" method="post" style="margin-right: 5px;">
+                            <input type="hidden" name="id" value="@userViewModel.Id" />
+                            <button type="submit" class="btn btn-success">Approve</button>
+                        </form>
+
+                        <form asp-controller="CV" asp-action="Disapprove" method="post">
+                            <input type="hidden" name="id" value="@userViewModel.Id" />
+                            <button type="submit" class="btn btn-danger">Disapprove</button>
+                        </form>
+                    </div>
+                </td>
+
+                <td>@userViewModel.TrackingId</td>
+                <td>@userViewModel.FullName</td>
+                <td>@userViewModel.Email</td>
+                <td>@userViewModel.Address</td>
+                <td>@userViewModel.DateOfBirth</td>
+                <td>@userViewModel.Phone</td>
+                <td>@userViewModel.City</td>
+                <td>@userViewModel.Qualification</td>
+                <td>@userViewModel.JobCategory</td>
+                <td>@userViewModel.Position</td>
+                <td>@userViewModel.KeySkills</td>
+                <td>@userViewModel.HasExperience</td>
+                
+            </tr>
+        }
+    </tbody>
+</table>
+</div>
+</div>
+ 
+ <script>
+
+
+    function viewFile(fileId) {
+        // You may need to adjust the URL based on your route configuration
+        var viewUrl = '/File/View/' + fileId;
+        window.open(viewUrl, '_blank');
+
+
+
+
+    }
+    @section scripts {
+            <script src="~/js/Search.js" ></script>
+
+    }
+
+<script>
+    
+</script>

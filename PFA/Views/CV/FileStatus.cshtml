@@ -1,0 +1,32 @@
+﻿@model FileModel
+
+<h2>File Status</h2>
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <p class="text-danger">@ViewBag.ErrorMessage</p>
+}
+else
+{
+    <p>Tracking ID: @Model.TrackingId</p>
+
+    <img src="@Model.Image" alt="Uploaded Image" />
+
+    <p>First Name: @Model.FirstName</p>
+    <p>Last Name: @Model.LastName</p>
+
+    <div class="status">
+        @if (Model.IsApproved)
+        {
+            <p class="approved">Status: Approved</p>
+        }
+        else if (Model.IsDisApproved) // Check if file is disapproved
+        {
+            <p class="disapproved">Status: Disapproved</p>
+        }
+        else
+        {
+            <p class="pending">Status: Pending Approval</p>
+        }
+    </div>
+}
