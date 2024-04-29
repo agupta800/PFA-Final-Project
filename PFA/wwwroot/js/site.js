@@ -106,6 +106,12 @@ $('#CustomImg img').on('mouseenter', function () {
 });
 
 //$('#CustomImg img').on('mouseleave', function () {
+//    $('#ImgModel').hide(); // Hide the modal
+//    $('#ImgBody').empty(); // Remove the image
+//});
+
+
+//$('#CustomImg img').on('mouseleave', function () {
 //    $('#ImgModel').hide();
 //});
 // Check if the event is already bound before binding again

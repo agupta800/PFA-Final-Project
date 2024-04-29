@@ -13,21 +13,26 @@
     }
 </style>
 
-<style>
-    .uploadcv_first_uploadl_cv {
+@* <style>
+    .uploadcv {
         /* Add background image URL and other properties */
         background-image: url('/img/cv_assets/resume-bg2.png');
         background-size: cover; /* Adjust background size as needed */
         background-position: center top 50px; /* Adjust vertical position */
         /* Add more CSS properties for positioning, size, etc. */
     }
-</style>
+</style> *@
 
 
 <form asp-controller="CV" asp-action="Upload" method="post" enctype="multipart/form-data">
+    <div class="container" style="margin-top: -25px;">
+        <div class="uploadcv_container" style="background-image: url('/img/cv_assets/resume-bg2.png'); background-size: cover; height: 150vh;" , "col-12">
 
-    <div class="uploadcv_first_uploadl_cv">
-        <div class="col-sm-12 text-center">
+            <div class="col-md-8" style="background-color: rgba(255, 255, 255, .8); border: 2px solid #fff; padding: 30px; border-radius: 8px; margin: 30px 0 30px 30px;">
+
+                <!-- Your content here -->
+
+                    <div class="col-sm-12 text-center">
             <h3 class="no-mrg-t text-dark">
                 Apply for Jobs Effortlessly </h3>
                 <p class="pdd-xs-b">
@@ -96,7 +101,7 @@
 
         <div style="width: 50%; float: left;">
             <div class="form-group" style="width: 80%;">
-                <label asp-for="Image" class="control-label">Image (PDF only)</label>
+                <label asp-for="Image" class="control-label">Choose Your CV (PDF only)</label>
             <input asp-for="Image" type="file" accept=".pdf" class="form-control" />
             <span asp-validation-for="Image" class="text-danger"></span>
             <div id="imagePath"></div>
@@ -368,29 +373,29 @@
             </div>
         </div>
 
-        <div style="width: 50%; float: left;">
-            <div class="form-group" style="display: flex; align-items: baseline;">
-                <label asp-for="KeySkills" class="control-label" style="margin-right: 10px;"></label>
-                <input asp-for="KeySkills" class="form-control" style="text-align: left; flex: 1;" placeholder="e.g., Java, Python, Data Analysis" />
-                <span asp-validation-for="KeySkills" class="text-danger"></span>
-            </div>
-        </div>
+                <div style="width: 50%; float: left;">
+                    <div class="form-group">
+                        <label asp-for="KeySkills" class="control-label" style="margin-right: 10px;"></label>
+                        <input asp-for="KeySkills" class="form-control" style="text-align: left; flex: 1;" placeholder="e.g., Java, Python, Data Analysis" />
+                        <span asp-validation-for="KeySkills" class="text-danger"></span>
+                    </div>
+                </div>
 
+                <div style="clear: both;"></div> <!-- Clear the float -->
 
-
-            @*    <button type="submit" class="btn btn-primary form_submit_popup_uploadl_cv"
-            id="form_submit_popup_uploadl_cv">
-            Submit your CV
-            </button> *@
-
-        <button type="submit" class="btn rounded-pill py-3 px-3" style="background-color: #ff6a00; color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-left: 100px; border-radius: 10px;">
-            Submit your CV
-        </button>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button type="submit" class="btn  py-3 px-3" style="background-color: #ff6a00; color: white; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                        Submit your CV
+                    </button>
+                </div>
 
 
         
        
 
+    </div>
+    </div>
+    </div>
     </div>
 
 </form>

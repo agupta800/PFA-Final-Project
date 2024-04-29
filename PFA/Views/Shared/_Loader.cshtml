@@ -1,3 +1,23 @@
-﻿<div class="loading">
-    Loading&#8230
+﻿<div class="loader-container">
+    <div class="loading">
+        <div class="spinner"></div>
+    </div>
 </div>
+<style>
+.loader-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999; /* Make sure it appears above other content */
+}
+
+.loading {
+    font-size: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+</style>

@@ -71,13 +71,6 @@ namespace PFA.Controllers
 
             return View(vm);
         }
-
-
-
-
-
-
-
         public async Task<IActionResult> Contact()
         {
 

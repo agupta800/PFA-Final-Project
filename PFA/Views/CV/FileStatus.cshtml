@@ -1,32 +1,85 @@
 ﻿@model FileModel
 
-<h2>File Status</h2>
+<style>
+    h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+    }
 
-@if (ViewBag.ErrorMessage != null)
-{
-    <p class="text-danger">@ViewBag.ErrorMessage</p>
-}
-else
-{
-    <p>Tracking ID: @Model.TrackingId</p>
+    .text-danger {
+        color: red;
+    }
 
-    <img src="@Model.Image" alt="Uploaded Image" />
+    img {
+        max-width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
 
-    <p>First Name: @Model.FirstName</p>
-    <p>Last Name: @Model.LastName</p>
+    .status p {
+        font-size: 18px;
+        margin: 10px 0;
+    }
 
-    <div class="status">
-        @if (Model.IsApproved)
+    .approved {
+        color: green;
+    }
+
+    .disapproved {
+        color: red;
+    }
+
+    .pending {
+        color: orange;
+    }
+
+    /* Centering Container */
+    .center-container {
+        text-align: center;
+    }
+
+    .file-status-container {
+        display: inline-block;
+        text-align: left; /* Reset text alignment for inner content */
+        padding: 30px; /* Increased padding */
+        border-radius: 10px; /* Rounded corners */
+        background-color: #f4f4f4; /* Background color */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Box shadow */
+        width: 500px; /* Increased width */
+    }
+</style>
+
+<div class="center-container">
+    <h2>File Status</h2>
+
+    <div class="file-status-container">
+        @if (ViewBag.ErrorMessage != null)
         {
-            <p class="approved">Status: Approved</p>
-        }
-        else if (Model.IsDisApproved) // Check if file is disapproved
-        {
-            <p class="disapproved">Status: Disapproved</p>
+            <p class="text-danger">@ViewBag.ErrorMessage</p>
         }
         else
         {
-            <p class="pending">Status: Pending Approval</p>
+            <p>Tracking ID: @Model.TrackingId</p>
+            <p>First Name: @Model.FirstName</p>
+            <p>Last Name: @Model.LastName</p>
+
+            <div class="status">
+                @if (Model.IsApproved)
+                {
+                    <p class="approved">Status: Approved</p>
+                }
+                else if (Model.IsDisApproved)
+                {
+                    <p class="disapproved">Status: Disapproved</p>
+                }
+                else
+                {
+                    <p class="pending">Status: Pending Approval</p>
+                }
+            </div>
         }
     </div>
-}
+</div>

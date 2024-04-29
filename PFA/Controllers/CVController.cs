@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using PFA.JobModel;
@@ -31,12 +32,20 @@ namespace PFA.Controllers
         }
 
 
-        
+
         [HttpPost]
+        [Authorize] // This attribute ensures that only authenticated users can access this action
         public IActionResult Upload(FileModel model, IFormFile image)
         {
             if (!ModelState.IsValid)
                 return View(model);
+
+            // Check if the user is authenticated
+            if (!User.Identity.IsAuthenticated)
+            {
+                TempData["error"] = "Please login to upload your CV";
+                return RedirectToAction("Login", "Account"); // Redirect to the Login page
+            }
 
             // Save the image to the server
             if (image != null && image.Length > 0)
@@ -65,9 +74,13 @@ namespace PFA.Controllers
             _context.Files.Add(model);
             _context.SaveChanges();
 
+            // Set success message
+            TempData["success"] = "CV uploaded successfully. Here is your tracking ID: " + model.TrackingId;
+
             // Redirect to Index action with the tracking ID as a route parameter
             return RedirectToAction("NewTrack", new { trackingId = model.TrackingId });
         }
+
 
 
 
@@ -184,8 +197,10 @@ namespace PFA.Controllers
             if (model == null)
             {
                 // Handle the case where the model is not found
-                ViewBag.ErrorMessage = "File not found. Please check the tracking ID.";
-                return View("Track");
+                //ViewBag.ErrorMessage = "File not found. Please check the tracking ID.";
+                TempData["Error"] = "File not found. Please check the tracking ID.";
+                return RedirectToAction("Index", "Home");
+
             }
 
             // Pass the model to the view
@@ -201,7 +216,7 @@ namespace PFA.Controllers
                 //remove the staff from the database
                 _context.Files.Remove(staff);
                 _context.SaveChanges();
-                notification.Success("Job deleted Sucessfully");
+                notification.Success("CV Deleted Successfully");
 
                 return RedirectToAction("Index");
             }
